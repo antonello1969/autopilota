@@ -2107,26 +2107,8 @@ if ('serviceWorker' in navigator) {
     // Il SW viene generato inline e registrato come blob URL
     const swCode = `
 const CACHE = '${TILE_CACHE_NAME}';
-const APP_CACHE = 'cms-app-v1';
-
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(APP_CACHE).then(cache =>
-      fetch(self.registration.scope + 'index.html')
-        .then(response => cache.put('index.html', response))
-        .catch(() => {})
-    )
-  );
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim());
-});
-
 self.addEventListener('fetch', event => {
   const url = event.request.url;
-  
   if (url.includes('arcgisonline.com') || url.includes('/tile/')) {
     event.respondWith(
       caches.open(CACHE).then(cache =>
@@ -2139,18 +2121,6 @@ self.addEventListener('fetch', event => {
         })
       )
     );
-    return;
-  }
-  
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request).catch(() =>
-        caches.open(APP_CACHE).then(cache =>
-          cache.match('index.html')
-        )
-      )
-    );
-    return;
   }
 });
 `;
@@ -2218,11 +2188,11 @@ function estimateTiles() {
   el.innerHTML = `<strong style="color:var(--accent-primary)">${count}</strong> tile stimati<br>
     <span style="color:var(--text-muted)">~${estimatedMB} MB &nbsp;|&nbsp; Zoom ${zMin}→${zMax}</span>`;
   el.style.color = count > 10000 ? 'var(--accent-warning)' : 'var(--text-secondary)';
-  document.getElementById('btn-download-tiles').disabled = (count > 5000);
-  if (count > 5000) {
-    el.innerHTML += `<br><span style="color:var(--accent-danger)">⚠️ Area troppo grande (>125MB). Riduci lo zoom massimo o l'area visibile.</span>`;
-  } else if (count > 3000) {
-    el.innerHTML += `<br><span style="color:var(--accent-warning)">⚠️ Attenzione: download grande. Potrebbe richiedere qualche minuto.</span>`;
+  document.getElementById('btn-download-tiles').disabled = (count > 50000);
+  if (count > 50000) {
+    el.innerHTML += `<br><span style="color:var(--accent-danger)">⚠️ Area troppo grande (>1.2GB). Riduci lo zoom massimo o l'area visibile.</span>`;
+  } else if (count > 10000) {
+    el.innerHTML += `<br><span style="color:var(--accent-warning)">⚠️ Attenzione: download molto grande. Potrebbe richiedere molto tempo.</span>`;
   }
   // Salva i parametri calcolati per il download
   document.getElementById('btn-download-tiles')._zMin = zMin;
