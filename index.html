@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, minimum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a1628">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkNvbnRpbmVudGFsIE1hcmluZSBTeXN0ZW1zIiwKICAic2hvcnRfbmFtZSI6ICJDTVMgTmF2aWdhIiwKICAiZGVzY3JpcHRpb24iOiAiQXV0b3BpbG90YSBlIG5hdmlnYXppb25lIHBlciBnb3p6byA3bSIsCiAgInN0YXJ0X3VybCI6ICIuIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwNzBlMWEiLAogICJ0aGVtZV9jb2xvciI6ICIjMDBkNGZmIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBuYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNuSUhacFpYZENiM2c5SnpBZ01DQXhPVElnTVRreUp6NDhjbVZqZENCM2FXUjBhRDBuTVRreUp5Qm9aV2xuYUhROUp6RTVNaWNnY25nOUp6SXdKeUJtYVd4c1BTY2xNak13WVRFMk1qZ25MejQ4ZEdWNGRDQjVQU2N4TkRBbklIZzlKemsySnlCMFpYaDBMV0Z1WTJodmNqMG5iV2xrWkd4bEp5Qm1iMjUwTFhOcGVtVTlKekV5TUNjKzRwcVRQQzkwWlhoMFBqd3ZjM1puUGc9PSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBuYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNuSUhacFpYZENiM2c5SnpBZ01DQXhPVElnTVRreUp6NDhjbVZqZENCM2FXUjBhRDBuTVRreUp5Qm9aV2xuYUhROUp6RTVNaWNnY25nOUp6SXdKeUJtYVd4c1BTY2xNak13WVRFMk1qZ25MejQ4ZEdWNGRDQjVQU2N4TkRBbklIZzlKemsySnlCMFpYaDBMV0Z1WTJodmNqMG5iV2xrWkd4bEp5Qm1iMjUwTFhOcGVtVTlKekV5TUNjKzRwcVRQQzkwWlhoMFBqd3ZjM1puUGc9PSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0KICBdCn0=">
+<meta name="apple-mobile-web-app-title" content="CMS Naviga">
+<title>Continental Marine Systems</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<style>
+  :root {
+    --bg-primary: #070e1a;
+    --bg-secondary: #0a1628;
+    --bg-tertiary: #0f1d33;
+    --bg-card: linear-gradient(145deg, #0f1d33 0%, #0a1628 100%);
+    --accent-primary: #00d4ff;
+    --accent-secondary: #0ea5e9;
+    --accent-success: #00e676;
+    --accent-warning: #ffb300;
+    --accent-danger: #ff3d71;
+    --text-primary: #ffffff;
+    --text-secondary: #a3b8d0;
+    --text-muted: #64748b;
+    --border-color: rgba(0, 212, 255, 0.2);
+    --border-glow: rgba(0, 212, 255, 0.3);
+    --glass-bg: rgba(10, 22, 40, 0.92);
+    --panel-shadow: 
+      inset 0 1px 1px rgba(255, 255, 255, 0.1),
+      0 10px 30px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(0, 0, 0, 0.4);
+    --compass-bg: radial-gradient(circle at 30% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                   radial-gradient(circle, #0f1d33 0%, #0a1628 100%);
+    --map-filter: none;
+  }
+  
+  [data-theme="light"] {
+    --bg-primary: #f0f4f8;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #e8eef4;
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --accent-primary: #0077b6;
+    --accent-secondary: #0096c7;
+    --accent-success: #2a9d8f;
+    --accent-warning: #e9c46a;
+    --accent-danger: #e63946;
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --border-color: rgba(0, 119, 182, 0.2);
+    --border-glow: rgba(0, 119, 182, 0.3);
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --panel-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--border-color);
+    --compass-bg: radial-gradient(circle at 30% 30%, rgba(0, 119, 182, 0.08) 0%, transparent 50%),
+                   radial-gradient(circle, #ffffff 0%, #f0f4f8 100%);
+    --map-filter: contrast(1.1) saturate(1.2);
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, var(--bg-primary) 0%, color-mix(in srgb, var(--bg-primary) 80%, #000000) 100%);
+    color: var(--text-primary);
+    height: 100dvh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s ease;
+  }
+  
+  #main-header {
+    height: 64px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    padding-top: env(safe-area-inset-top);
+    flex-shrink: 0;
+    z-index: 3000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .brand { display: flex; align-items: center; gap: 12px; }
+  
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: white;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .logo-icon:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 212, 255, 0.5); }
+  
+  .logo-text {
+    font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 1px;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .logo-sub { font-size: 9px; font-weight: 500; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: -2px; }
+  
+  .btn-header-ap {
+    padding: 0 15px;
+    border-radius: 10px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 15px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  .btn-header-ap.active {
+    background: linear-gradient(135deg, #00c853 0%, var(--accent-success) 100%);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
+    border: none;
+  }
+  .btn-header-ap.inactive {
+    background: linear-gradient(135deg, #d32f2f 0%, var(--accent-danger) 100%);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255, 61, 113, 0.3);
+    border: none;
+  }
+  
+  @media (max-width: 600px) {
+    .btn-header-ap {
+      height: 36px;
+      min-width: 80px;
+      font-size: 12px;
+      padding: 0 10px;
+      margin-left: 8px;
+    }
+  }
+  
+  .header-controls { display: flex; align-items: center; gap: 12px; }
+  
+  .header-rudder-controls {
+    display: flex; gap: 12px; align-items: center;
+    margin: 0 20px; flex: 1; justify-content: center; max-width: 500px;
+  }
+  .btn-header { flex: 1; min-width: 80px; max-width: 140px; height: 48px; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+  .btn-header.btn-center { flex: 0 0 48px; min-width: 48px; max-width: 48px; height: 48px; font-size: 16px; }
+  
+  @media (max-width: 768px) {
+    .header-rudder-controls { gap: 8px; margin: 0 12px; }
+    .btn-header { min-width: 60px; max-width: 100px; height: 44px; font-size: 18px; }
+    .btn-header.btn-center { flex: 0 0 44px; min-width: 44px; max-width: 44px; height: 44px; font-size: 14px; }
+  }
+  @media (max-width: 600px) {
+    .header-rudder-controls { gap: 6px; margin: 0 8px; }
+    .btn-header { min-width: 50px; max-width: 80px; height: 40px; font-size: 16px; }
+    .btn-header.btn-center { flex: 0 0 40px; min-width: 40px; max-width: 40px; height: 40px; font-size: 12px; }
+    .theme-toggle { width: 36px; height: 36px; font-size: 18px; }
+  }
+  
+  .theme-toggle {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(180deg, var(--bg-tertiary) 0%, var(--bg-secondary) 45%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+    border: 1px solid var(--border-color);
+    color: var(--accent-primary); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 20px; transition: all 0.2s ease;
+    box-shadow: 
+      inset 0 1px 1px rgba(255,255,255,0.3),
+      0 4px 8px rgba(0,0,0,0.1);
+  }
+  [data-theme="dark"] .theme-toggle {
+    background: linear-gradient(180deg, #2e4a6a 0%, #1e2e4a 45%, #0a1628 50%, #000 100%);
+    border-color: #000;
+  }
+  .theme-toggle:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+  .theme-toggle:active { transform: translateY(2px); box-shadow: inset 0 3px 6px rgba(0,0,0,0.2); }
+  
+  .system-status { display: flex; gap: 10px; align-items: center; }
+  
+  .status-pill {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 12px; background: var(--bg-tertiary);
+    border-radius: 20px; border: 1px solid var(--border-color);
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+  
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .status-dot.online { background: var(--accent-success); box-shadow: 0 0 8px var(--accent-success); animation: pulse-dot 2s ease-in-out infinite; }
+  .status-dot.warning { background: var(--accent-warning); box-shadow: 0 0 8px var(--accent-warning); animation: pulse-dot 2s ease-in-out infinite; }
+  .status-dot.offline { background: var(--accent-danger); box-shadow: 0 0 8px var(--accent-danger); }
+  .status-dot.connecting { background: var(--accent-primary); box-shadow: 0 0 8px var(--accent-primary); animation: spin-dot 1s linear infinite; }
+  
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.2); } }
+  @keyframes spin-dot { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  
+  .connection-spinner {
+    width: 14px; height: 14px;
+    border: 2px solid var(--border-color); border-top-color: var(--accent-primary);
+    border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  #nav-tabs {
+    height: 52px; background: var(--bg-secondary);
+    display: flex; border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0; overflow-x: auto; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; padding: 0 8px; gap: 4px;
+  }
+  #nav-tabs::-webkit-scrollbar { display: none; }
+  
+  .nav-tab {
+    flex: 1; min-width: 80px; max-width: 120px;
+    background: transparent; color: var(--text-muted);
+    border: none; font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    transition: all 0.3s ease; border-radius: 8px 8px 0 0;
+    position: relative; padding: 8px 4px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    margin-top: 4px; cursor: pointer;
+  }
+  .nav-tab::before {
+    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 0; height: 2px; background: var(--accent-primary);
+    transition: width 0.3s ease; border-radius: 2px 2px 0 0;
+  }
+  .nav-tab.active { color: var(--accent-primary); background: linear-gradient(180deg, transparent 0%, rgba(0, 212, 255, 0.08) 100%); }
+  .nav-tab.active::before { width: 60%; box-shadow: 0 0 10px var(--accent-primary); }
+  .nav-tab-icon { font-size: 18px; opacity: 0.8; transition: all 0.3s ease; }
+  .nav-tab.active .nav-tab-icon { opacity: 1; filter: drop-shadow(0 0 4px var(--accent-primary)); transform: translateY(-2px); }
+
+  .view-container {
+    flex: 1; position: relative; overflow-y: auto; overflow-x: hidden;
+    display: none; scrollbar-width: thin;
+    scrollbar-color: var(--accent-secondary) var(--bg-secondary);
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .view-container.active { display: block; }
+
+  .dashboard-grid {
+    display: grid; grid-template-columns: 1fr; gap: 12px; padding: 12px;
+    max-width: 1200px; margin: 0 auto;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+  @media (min-width: 768px) {
+    .dashboard-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 16px; }
+  }
+  
+  .instrument-panel {
+    background: var(--bg-card);
+    border-radius: 20px; padding: 18px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--panel-shadow);
+    position: relative; overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .instrument-panel::after { /* Effetto Vetro Lucido (Glossy) */
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.15) 0%, 
+      rgba(255, 255, 255, 0.05) 50%, 
+      transparent 100%);
+    pointer-events: none;
+    border-radius: 20px 20px 100% 100% / 20px 20px 20% 20%;
+  }
+  
+  .panel-header {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-primary);
+    margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);
+  }
+  .panel-header-icon {
+    width: 24px; height: 24px; background: rgba(0, 212, 255, 0.1);
+    border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--accent-primary);
+  }
+
+  /* === COMPASS + MINI MAP === */
+  .compass-container {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 16px; justify-content: center;
+  }
+  @media (min-width: 768px) {
+    .compass-container { flex-direction: row; align-items: center; }
+  }
+  .compass-left {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 10px; flex-shrink: 0;
+  }
+  
+  /* === COMPASS (CLASSIC MARINE LIQUID STYLE) === */
+  .hud-compass {
+    position: relative; width: 200px; height: 200px;
+    border-radius: 50%; background: #000 !important;
+    border: 4px solid #1a1a1a;
+    box-shadow: 
+      0 12px 35px rgba(0, 0, 0, 0.6),
+      0 0 0 2px var(--bg-tertiary),
+      0 0 0 4px var(--border-color);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  [data-theme="dark"] .hud-compass {
+    box-shadow: 
+      0 12px 35px rgba(0, 0, 0, 0.8),
+      0 0 0 2px #000,
+      0 0 0 4px #1a1a1a;
+  }
+
+  @media (min-width: 768px) { .hud-compass { width: 240px; height: 240px; } }
+
+  /* === COMPASS RING (LA ROSA) === */
+  .compass-ring {
+    position: absolute; width: 100%; height: 100%;
+    border-radius: 50%; 
+    transition: transform 0.1s linear;
+    background: #000;
+  }
+  .compass-degree {
+    position: absolute; width: 100%; height: 100%; z-index: 3;
+    font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.6);
+    text-shadow: 0 0 5px rgba(255,255,255,0.2);
+  }
+  .compass-degree.major { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.9); text-shadow: 0 0 8px rgba(255,255,255,0.4); }
+  .compass-degree.north { font-size: 20px; font-weight: 700; color: var(--accent-danger); text-shadow: 0 0 12px var(--accent-danger); }
+  
+  .compass-degree::before { content: ''; position: absolute; width: 1px; height: 12px; background: rgba(255,255,255,0.4); left: 50%; top: 4px; transform: translateX(-50%); }
+  .compass-degree.major::before { height: 16px; background: rgba(255,255,255,0.8); width: 2px; top: 2px; }
+  .compass-degree.north::before { height: 18px; background: var(--accent-danger); width: 2px; top: 0px; }
+  
+  .compass-degree span { position: absolute; left: 50%; top: 22px; transform: translateX(-50%); }
+  .compass-degree.major span { top: 24px; }
+  .compass-degree.north span { top: 20px; }
+  @media (min-width: 768px) {
+    .compass-degree span { top: 28px; }
+    .compass-degree.major span { top: 30px; }
+    .compass-degree.north span { top: 26px; }
+  }
+  
+  .compass-cardinal { position: absolute; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 14px; color: rgba(255,255,255,0.6); pointer-events: none; z-index: 5; }
+  .compass-cardinal.n { top: 42px; left: 50%; transform: translateX(-50%); color: var(--accent-danger); font-size: 16px; }
+  .compass-cardinal.e { right: 42px; top: 50%; transform: translateY(-50%); }
+  .compass-cardinal.s { bottom: 42px; left: 50%; transform: translateX(-50%); }
+  .compass-cardinal.w { left: 42px; top: 50%; transform: translateY(-50%); }
+  
+  .compass-marker {
+    position: absolute; width: 4px; height: 35px;
+    background: var(--accent-danger);
+    top: -2px; left: 50%; transform: translateX(-50%);
+    box-shadow: 0 0 15px var(--accent-danger), 0 0 5px var(--accent-danger); z-index: 25;
+    border-radius: 2px;
+  }
+  .compass-marker::after { /* Punta della Lubber Line */
+    content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    border-left: 8px solid transparent; border-right: 8px solid transparent;
+    border-top: 12px solid var(--accent-danger);
+    filter: drop-shadow(0 0 8px var(--accent-danger));
+  }
+
+  .bearing-bug {
+    position: absolute;
+    width: 100%; height: 100%;
+    z-index: 15; pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.4, 1), opacity 0.3s ease;
+    opacity: 0;
+  }
+  .bearing-bug::after {
+    content: ''; position: absolute;
+    top: 4px; left: 50%; transform: translateX(-50%);
+    border-left: 12px solid transparent; border-right: 12px solid transparent;
+    border-bottom: 16px solid var(--accent-success);
+    filter: drop-shadow(0 0 10px var(--accent-success));
+    transition: all 0.3s ease;
+  }
+  .bearing-bug.heading-hold::after {
+    border-bottom: 16px solid var(--accent-primary);
+    filter: drop-shadow(0 0 10px var(--accent-primary));
+  }
+  
+  .compass-value {
+    font-family: 'Rajdhani', monospace; font-size: 48px; font-weight: 700;
+    color: #fff !important; text-shadow: 0 0 20px var(--accent-primary); z-index: 10;
+    background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 80%);
+    padding: 15px; border-radius: 50%;
+  }
+  @media (min-width: 768px) { .compass-value { font-size: 64px; } }
+  .compass-value span { font-size: 20px; font-weight: 500; color: rgba(255,255,255,0.7); }
+
+  /* === COMPASS DEGREE POSITIONS === */
+  .compass-degree:nth-child(1) { transform: rotate(0deg); }
+  .compass-degree:nth-child(2) { transform: rotate(30deg); }
+  .compass-degree:nth-child(3) { transform: rotate(60deg); }
+  .compass-degree:nth-child(4) { transform: rotate(90deg); }
+  .compass-degree:nth-child(5) { transform: rotate(120deg); }
+  .compass-degree:nth-child(6) { transform: rotate(150deg); }
+  .compass-degree:nth-child(7) { transform: rotate(180deg); }
+  .compass-degree:nth-child(8) { transform: rotate(210deg); }
+  .compass-degree:nth-child(9) { transform: rotate(240deg); }
+  .compass-degree:nth-child(10) { transform: rotate(270deg); }
+  .compass-degree:nth-child(11) { transform: rotate(300deg); }
+  .compass-degree:nth-child(12) { transform: rotate(330deg); }
+
+
+  /* === MINI MAP === */
+  .mini-map-wrapper { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; width: 100%; }
+  
+  #mini-map {
+    width: 100%; height: 160px;
+    border-radius: 12px; border: 1px solid var(--border-color);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.12);
+    overflow: hidden; position: relative; background: var(--bg-tertiary); cursor: grab;
+  }
+  #mini-map:active { cursor: grabbing; }
+  
+  .mini-map-footer { display: flex; justify-content: space-between; align-items: center; }
+  
+  .mini-map-label {
+    font-size: 9px; font-family: 'Rajdhani', sans-serif; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted);
+  }
+  
+  .btn-minimap-expand {
+    background: rgba(0, 212, 255, 0.1); border: 1px solid var(--border-color);
+    border-radius: 6px; color: var(--accent-primary); font-size: 12px;
+    width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .btn-minimap-expand:hover { background: rgba(0, 212, 255, 0.22); }
+
+  /* Mini-map Leaflet overrides */
+  #mini-map .leaflet-control-zoom { margin: 6px !important; }
+  #mini-map .leaflet-control-zoom a {
+    width: 22px !important; height: 22px !important; line-height: 22px !important;
+    font-size: 14px !important; background: var(--glass-bg) !important;
+    color: var(--accent-primary) !important; border: 1px solid var(--border-color) !important;
+  }
+  #mini-map .leaflet-control-zoom a:hover { background: rgba(0,212,255,0.18) !important; }
+  .mini-wp-tooltip {
+    background: var(--glass-bg); border: 1px solid var(--border-color);
+    color: var(--text-primary); font-family: 'Rajdhani', sans-serif;
+    font-size: 11px; padding: 2px 6px; border-radius: 4px; box-shadow: none;
+  }
+  .mini-wp-tooltip::before { display: none; }
+
+
+  
+  .compass-labels {
+    display: flex; justify-content: space-between; width: 100%; max-width: 220px;
+    font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  /* === DIGITAL DISPLAY === */
+  .digital-display { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .display-item {
+    background: var(--bg-tertiary);
+    padding: 14px 10px; border-radius: 12px; text-align: center;
+    border: 1px solid var(--border-color); 
+    box-shadow: 
+      inset 0 2px 10px rgba(0,0,0,0.05),
+      inset 0 1px 1px rgba(255,255,255,0.1);
+    position: relative; overflow: hidden; transition: all 0.3s ease;
+  }
+  [data-theme="dark"] .display-item {
+    background: linear-gradient(180deg, #0f1d33 0%, #050a14 100%);
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.1);
+  }
+  .display-item::after { /* Riflesso lente plastica */
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 40%, rgba(255,255,255,0.05) 100%);
+    pointer-events: none;
+  }
+  .display-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 6px; }
+  .display-value { font-family: 'Rajdhani', monospace; font-size: 20px; font-weight: 700; color: var(--text-primary); text-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+  .display-value.small { font-size: 14px; }
+  @media (min-width: 768px) { .display-value { font-size: 26px; } .display-value.small { font-size: 16px; } }
+  .display-unit { font-size: 12px; color: var(--text-muted); margin-left: 2px; }
+  
+  .trust-indicator { margin-top: 16px; padding: 14px; background: var(--bg-tertiary); border-radius: 12px; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+  .trust-indicator:hover { border-color: var(--accent-primary); }
+  .trust-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .trust-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); font-weight: 500; }
+  .trust-icon { font-size: 16px; background: rgba(0, 212, 255, 0.1); padding: 4px 8px; border-radius: 6px; }
+  .trust-bar-container { height: 6px; background: var(--bg-secondary); border-radius: 3px; overflow: hidden; margin-bottom: 8px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); }
+  .trust-bar { height: 100%; border-radius: 3px; transition: width 0.5s ease, background-color 0.3s ease; }
+  .trust-bar.compass { background: linear-gradient(90deg, var(--accent-success) 0%, #00c853 100%); box-shadow: 0 0 10px rgba(0, 230, 118, 0.4); }
+  .trust-bar.fusion { background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%); box-shadow: 0 0 10px rgba(0, 212, 255, 0.4); }
+  .trust-bar.gps { background: linear-gradient(90deg, var(--accent-secondary) 0%, #3b82f6 100%); box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); }
+  .trust-bar.gps-forced { background: linear-gradient(90deg, var(--accent-warning) 0%, #ff8c00 100%); box-shadow: 0 0 10px rgba(255, 179, 0, 0.4); }
+  .trust-text { font-size: 11px; font-weight: 500; text-align: center; color: var(--text-secondary); }
+
+  /* === RUDDER === */
+  .rudder-section { display: flex; flex-direction: column; gap: 16px; }
+  .rudder-gauge-container { position: relative; }
+  .rudder-gauge {
+    width: 100%; height: 90px; background: var(--bg-primary); border-radius: 12px;
+    position: relative; overflow: hidden; border: 2px solid var(--bg-tertiary);
+    box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
+  }
+  [data-theme="dark"] .rudder-gauge {
+    background: #050a14;
+    border-color: #1a1a1a;
+    box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255,255,255,0.05);
+  }
+  @media (min-width: 768px) { .rudder-gauge { height: 100px; } }
+  .rudder-gauge.centered { border-color: var(--accent-success); box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 230, 118, 0.2); }
+  .rudder-gauge.warning { border-color: var(--accent-warning); box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 179, 0, 0.2); }
+  .rudder-gauge.danger { border-color: var(--accent-danger); box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 61, 113, 0.2); }
+  .rudder-scale { position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent 5%, var(--border-color) 5%, var(--border-color) 95%, transparent 95%); }
+  .rudder-bar-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.05); }
+  .rudder-bar-fill { position: absolute; top: 0; left: 0; height: 100%; width: 50%; background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%); opacity: 0.15; transition: width 0.3s ease; }
+  .rudder-ticks { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; padding: 0 10%; align-items: center; }
+  .rudder-tick { width: 1px; height: 20px; background: var(--text-muted); opacity: 0.3; }
+  .rudder-tick.center { height: 30px; background: var(--accent-warning); opacity: 0.8; }
+  .rudder-center-mark { position: absolute; top: 0; left: 50%; width: 2px; height: 100%; background: linear-gradient(180deg, transparent 10%, var(--accent-warning) 10%, var(--accent-warning) 90%, transparent 90%); transform: translateX(-50%); opacity: 0.6; }
+  .rudder-needle { position: absolute; top: 50%; left: 50%; width: 4px; height: 55px; background: linear-gradient(180deg, var(--accent-primary) 0%, var(--accent-secondary) 100%); transform-origin: center center; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 2px; box-shadow: 0 0 15px var(--accent-primary); }
+  .rudder-needle.centered { background: linear-gradient(180deg, var(--accent-success) 0%, #00c853 100%); box-shadow: 0 0 15px var(--accent-success); }
+  .rudder-needle.warning { background: linear-gradient(180deg, var(--accent-warning) 0%, #ff8c00 100%); box-shadow: 0 0 15px var(--accent-warning); }
+  .rudder-needle.danger { background: linear-gradient(180deg, var(--accent-danger) 0%, #ff1744 100%); box-shadow: 0 0 15px var(--accent-danger); }
+  .rudder-value-display { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); font-family: 'Rajdhani', monospace; font-size: 18px; font-weight: 700; color: var(--accent-primary); background: var(--bg-secondary); padding: 2px 12px; border-radius: 12px; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+  .rudder-value-display.centered { color: var(--accent-success); border-color: var(--accent-success); box-shadow: 0 0 10px rgba(0, 230, 118, 0.3); }
+  .rudder-labels { display: flex; justify-content: space-between; padding: 0 10%; margin-top: 6px; font-size: 10px; color: var(--text-muted); }
+  
+  .control-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; }
+  /* --- GLOBAL 3D GLOSSY BUTTON STYLE --- */
+  button, .btn-control, .btn-header-ap, .btn-goto, .btn-emergency, .btn-ap-start, .btn-minimap-expand {
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.2);
+    font-family: 'Rajdhani', sans-serif; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    cursor: pointer; transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+      inset 0 1px 1px rgba(255,255,255,0.3),
+      inset 0 -2px 5px rgba(0,0,0,0.1),
+      0 4px 10px rgba(0,0,0,0.1);
+  }
+  [data-theme="dark"] button, [data-theme="dark"] .btn-control, [data-theme="dark"] .btn-header-ap {
+    border-color: #000;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.3), inset 0 -2px 5px rgba(0,0,0,0.5), 0 4px 10px rgba(0,0,0,0.4);
+  }
+  
+  /* Riflesso superiore comune a tutti i pulsanti */
+  button::before, .btn-control::before, .btn-header-ap::before, .btn-goto::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 45%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+    pointer-events: none; z-index: 1;
+  }
+
+  button:active, .btn-control:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 3px 10px rgba(0,0,0,0.2);
+  }
+  [data-theme="dark"] button:active, [data-theme="dark"] .btn-control:active {
+    box-shadow: inset 0 3px 10px rgba(0,0,0,0.7);
+  }
+
+  .btn-control {
+    height: 56px; border-radius: 14px;
+    background: linear-gradient(180deg, var(--bg-tertiary) 0%, var(--bg-secondary) 45%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+    color: var(--accent-primary); font-size: 20px;
+  }
+  [data-theme="dark"] .btn-control {
+    background: linear-gradient(180deg, #2e4a6a 0%, #1e2e4a 45%, #0a1628 50%, #000 100%);
+  }
+  
+  /* .btn-header-ap states definiti nella sezione primaria sopra */
+
+  .btn-goto {
+    padding: 6px 12px; border-radius: 6px; font-size: 10px;
+    background: linear-gradient(180deg, #2e4a6a 0%, #1e2e4a 45%, #0a1628 50%, #000 100%);
+    color: #fff; border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .btn-ap-start, #btn-ap-start, .btn-heading-hold {
+    height: 56px; border-radius: 12px; width: 100%;
+    background: linear-gradient(180deg, var(--bg-tertiary) 0%, var(--bg-secondary) 45%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+    color: var(--accent-primary); font-size: 14px;
+    box-shadow: 
+      inset 0 1px 1px rgba(255,255,255,0.3),
+      inset 0 -2px 5px rgba(0,0,0,0.1),
+      0 4px 10px rgba(0,0,0,0.1);
+  }
+  [data-theme="dark"] .btn-ap-start, [data-theme="dark"] #btn-ap-start {
+    background: linear-gradient(180deg, #2e4a6a 0%, #1e2e4a 45%, #0a1628 50%, #000 100%);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.3), inset 0 -2px 5px rgba(0,0,0,0.5), 0 4px 10px rgba(0,0,0,0.4);
+  }
+  .btn-ap-start:active { transform: translateY(2px); box-shadow: inset 0 3px 10px rgba(0,0,0,0.2); }
+
+  /* Pulsante Start Nav: Verde Lucido */
+  .btn-nav-start, #btn-start-nav {
+    height: 50px; border-radius: 12px;
+    background: linear-gradient(180deg, #c8e6c9 0%, #a5d6a7 45%, #66bb6a 50%, #2e7d32 100%);
+    color: #fff; border-color: #2e7d32; font-size: 13px;
+  }
+  [data-theme="dark"] .btn-nav-start, [data-theme="dark"] #btn-start-nav {
+    background: linear-gradient(180deg, #2e6a4a 0%, #1a442a 45%, #0a2a16 50%, #001a05 100%);
+    color: #00e676; border-color: #060;
+  }
+
+  /* Pulsante Stop Nav: Rosso Lucido */
+  .btn-nav-stop, #btn-stop-nav {
+    height: 50px; border-radius: 12px;
+    background: linear-gradient(180deg, #ffcdd2 0%, #ef9a9a 45%, #ef5350 50%, #c62828 100%);
+    color: #fff; border-color: #c62828; font-size: 13px;
+  }
+  [data-theme="dark"] .btn-nav-stop, [data-theme="dark"] #btn-stop-nav {
+    background: linear-gradient(180deg, #6a2e3a 0%, #441a24 45%, #2a0a12 50%, #1a0005 100%);
+    color: #ff3d71; border-color: #600;
+  }
+
+  .btn-emergency {
+    height: 52px; border-radius: 12px; width: 100%;
+    background: linear-gradient(180deg, #ffcdd2 0%, #ef9a9a 45%, #ef5350 50%, #c62828 100%);
+    color: white; font-size: 13px;
+  }
+  [data-theme="dark"] .btn-emergency {
+    background: linear-gradient(180deg, #ff4d7e 0%, #b31a3d 45%, #800a24 50%, #40000a 100%);
+  }
+
+  .btn-minimap-expand {
+    width: 26px; height: 26px; border-radius: 6px;
+    background: linear-gradient(180deg, var(--bg-tertiary) 0%, var(--bg-secondary) 45%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+    color: var(--accent-primary); border: 1px solid var(--border-color);
+  }
+  [data-theme="dark"] .btn-minimap-expand {
+    background: linear-gradient(180deg, #2e4a6a 0%, #1e2e4a 45%, #0a1628 50%, #000 100%);
+  }
+  
+  /* === AUTOPILOT === */
+  .autopilot-section { display: flex; flex-direction: column; gap: 16px; }
+  .autopilot-status { text-align: center; padding: 24px 20px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, transparent 100%); border-radius: 16px; border: 1px solid var(--border-color); position: relative; overflow: hidden; transition: all 0.3s ease; }
+  .autopilot-status:hover { border-color: var(--accent-primary); box-shadow: 0 0 20px rgba(0, 212, 255, 0.1); }
+  .autopilot-status::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-primary), transparent); }
+  .ap-status-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 12px; }
+  .ap-mode-display { font-family: 'Rajdhani', monospace; font-size: 24px; font-weight: 700; color: var(--accent-danger); text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
+  .btn-ap-start { width: 100%; height: 56px; background: linear-gradient(135deg, #00c853 0%, var(--accent-success) 100%); border: none; border-radius: 12px; color: white; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 230, 118, 0.35); transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .btn-ap-start:hover { box-shadow: 0 6px 25px rgba(0, 230, 118, 0.5); transform: translateY(-2px); }
+  .btn-ap-start:active { transform: scale(0.98); }
+
+  /* === MAP VIEW === */
+  #map { width: 100%; height: 100%; z-index: 1; filter: var(--map-filter); }
+  .map-hud { position: absolute; top: 12px; left: 12px; right: 12px; background: var(--glass-bg); backdrop-filter: blur(20px); border-radius: 14px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); flex-wrap: wrap; gap: 10px; }
+  @media (min-width: 768px) { .map-hud { top: 16px; left: 16px; right: 16px; padding: 14px 20px; } }
+  .map-info-item { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; }
+  @media (min-width: 768px) { .map-info-item { font-size: 13px; gap: 10px; } }
+  .map-info-value { font-family: 'Rajdhani', monospace; font-weight: 700; color: var(--accent-primary); font-size: 14px; }
+  .map-controls { position: absolute; bottom: 12px; left: 12px; right: 12px; background: var(--glass-bg); backdrop-filter: blur(20px); border-radius: 16px; padding: 14px; padding-bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 1000; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); }
+  @media (min-width: 768px) { .map-controls { bottom: 20px; left: 20px; right: 20px; padding: 18px; } }
+  .waypoint-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; text-align: center; }
+  @media (min-width: 768px) { .waypoint-info { gap: 14px; margin-bottom: 16px; } }
+  .wp-info-item { background: var(--bg-tertiary); padding: 10px 6px; border-radius: 10px; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+  .wp-info-item:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+  @media (min-width: 768px) { .wp-info-item { padding: 12px; } }
+  .wp-info-label { font-size: 9px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; letter-spacing: 0.5px; }
+  .wp-info-value { font-family: 'Rajdhani', monospace; font-size: 15px; font-weight: 700; color: var(--accent-primary); }
+  @media (min-width: 768px) { .wp-info-value { font-size: 18px; } }
+  .map-action-buttons { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; }
+  @media (min-width: 768px) { .map-action-buttons { gap: 12px; } }
+  .btn-map-action { height: 46px; border: none; border-radius: 10px; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s ease; touch-action: manipulation; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  @media (min-width: 768px) { .btn-map-action { height: 52px; font-size: 13px; border-radius: 12px; } }
+  .btn-nav-start { background: linear-gradient(135deg, #00c853 0%, var(--accent-success) 100%); color: white; box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3); }
+  .btn-nav-start:hover { box-shadow: 0 6px 20px rgba(0, 230, 118, 0.4); transform: translateY(-2px); }
+  .btn-nav-stop { background: linear-gradient(135deg, #d32f2f 0%, var(--accent-danger) 100%); color: white; box-shadow: 0 4px 15px rgba(255, 61, 113, 0.3); }
+  .btn-nav-stop:hover { box-shadow: 0 6px 20px rgba(255, 61, 113, 0.4); transform: translateY(-2px); }
+  .btn-menu { width: 46px; background: var(--bg-tertiary); color: var(--accent-primary); font-size: 18px; border: 1px solid var(--border-color); }
+  .btn-menu:hover { border-color: var(--accent-primary); background: var(--bg-secondary); }
+  @media (min-width: 768px) { .btn-menu { width: 52px; font-size: 20px; } }
+
+  /* === SETTINGS === */
+  .settings-container { padding: 16px; max-width: 800px; margin: 0 auto; }
+  .settings-section { background: var(--bg-card); backdrop-filter: blur(15px); border-radius: 16px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border-color); box-shadow: var(--panel-shadow); position: relative; overflow: hidden; transition: all 0.3s ease; }
+  .settings-section:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-glow); }
+  .settings-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent-primary), transparent); opacity: 0.5; }
+  .section-title { font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; color: var(--accent-primary); margin-bottom: 18px; text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; }
+  .section-title-icon { width: 28px; height: 28px; background: rgba(0, 212, 255, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--accent-primary); }
+  .param-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border-color); gap: 12px; }
+  .param-row:last-child { border-bottom: none; }
+  .param-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; }
+  .param-controls { display: flex; gap: 10px; align-items: center; }
+  .param-input { width: 80px; padding: 10px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--accent-primary); font-family: 'Rajdhani', monospace; font-size: 14px; font-weight: 600; text-align: center; transition: all 0.2s ease; }
+  .param-input:focus { outline: none; border-color: var(--accent-primary); box-shadow: 0 0 10px rgba(0, 212, 255, 0.2); }
+  .btn-set { padding: 10px 18px; background: var(--accent-secondary); border: none; border-radius: 8px; color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s ease; }
+  .btn-set:hover { background: var(--accent-primary); box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3); transform: translateY(-1px); }
+  .btn-set:active { transform: scale(0.95); }
+  .calibration-display { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px; }
+  .cal-item { background: var(--bg-tertiary); padding: 14px 8px; border-radius: 10px; text-align: center; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+  .cal-item:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+  .cal-label { font-size: 9px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .cal-value { font-family: 'Rajdhani', monospace; font-size: 20px; font-weight: 700; color: var(--accent-success); }
+
+  /* === TRIP COMPUTER === */
+  .trip-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; }
+  @media (min-width: 768px) { .trip-stats { grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 20px; } }
+  .stat-card { background: var(--bg-card); backdrop-filter: blur(15px); border-radius: 16px; padding: 24px 16px; text-align: center; border: 1px solid var(--border-color); box-shadow: var(--panel-shadow); position: relative; overflow: hidden; transition: all 0.3s ease; }
+  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-primary), transparent); opacity: 0.5; }
+  .stat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-glow); }
+  .stat-icon { width: 48px; height: 48px; background: rgba(0, 212, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--accent-primary); margin: 0 auto 14px; transition: all 0.3s ease; }
+  .stat-card:hover .stat-icon { transform: scale(1.1); background: rgba(0, 212, 255, 0.2); }
+  .stat-value { font-family: 'Rajdhani', monospace; font-size: 36px; font-weight: 700; color: var(--accent-primary); margin-bottom: 6px; text-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+  .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 500; }
+  .speed-chart-container { background: var(--bg-card); backdrop-filter: blur(15px); border-radius: 16px; padding: 20px; margin: 0 16px 16px; border: 1px solid var(--border-color); box-shadow: var(--panel-shadow); }
+  .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .chart-title { font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 1.5px; display: flex; align-items: center; gap: 8px; }
+  #speedChart { width: 100%; height: 120px; border-radius: 8px; }
+
+  #wp-drawer { display: none; margin-top: 14px; max-height: 180px; overflow-y: auto; background: var(--bg-tertiary); border-radius: 12px; padding: 12px; border: 1px solid var(--border-color); }
+  .wp-list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 8px; background: var(--bg-secondary); border-radius: 10px; border: 1px solid var(--border-color); transition: all 0.2s ease; }
+  .wp-list-item:hover { border-color: var(--accent-primary); transform: translateX(4px); }
+  .wp-list-item:last-child { margin-bottom: 0; }
+  .wp-name { font-weight: 600; color: var(--accent-primary); font-size: 14px; }
+  .btn-goto { padding: 8px 16px; background: var(--accent-secondary); border: none; border-radius: 8px; color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease; }
+  .btn-goto:hover { background: var(--accent-primary); box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3); }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+  ::-webkit-scrollbar-thumb { background: var(--accent-secondary); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+  
+  @media (max-width: 600px) { .logo-text { font-size: 18px; } .system-status { gap: 6px; } .status-pill { padding: 4px 8px; font-size: 9px; } .header-controls { gap: 8px; } }
+  
+  /* === GPS DATA PANEL === */
+  .attitude-panel-layout { display: flex; gap: 16px; align-items: center; justify-content: center; }
+  .attitude-data-left { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .attitude-data-left.grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; }
+  .mini-data-box { background: var(--bg-tertiary); padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center; }
+  [data-theme="dark"] .mini-data-box { background: linear-gradient(180deg, #0f1d33 0%, #050a14 100%); }
+  .mini-data-label { font-size: 9px; color: var(--text-muted); font-weight: 600; letter-spacing: 1px; }
+  .mini-data-value { font-family: 'Rajdhani', monospace; font-size: 18px; font-weight: 700; color: var(--text-primary); text-shadow: 0 0 8px rgba(0,212,255,0.3); }
+  .mini-data-value.micro { font-size: 12px; }
+  .mini-data-unit { font-size: 10px; color: var(--text-muted); margin-left: 2px; }
+
+
+  .fade-in { animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+  <header id="main-header">
+    <div class="brand">
+      <div class="logo-icon"><i class="ph ph-boat"></i></div>
+      <button id="btn-header-ap" class="btn-header-ap inactive" onclick="send('autostart')">AUTO OFF</button>
+    </div>
+    <div class="header-rudder-controls">
+      <button class="btn-control btn-header" id="btn-header-left"><i class="ph ph-caret-left"></i></button>
+      <button class="btn-control btn-header btn-center" id="btn-header-center"><i class="ph ph-dot-outline"></i></button>
+      <button class="btn-control btn-header" id="btn-header-right"><i class="ph ph-caret-right"></i></button>
+    </div>
+    <div class="header-controls">
+      <button class="theme-toggle" id="fullscreen-toggle" onclick="toggleFullscreen()" title="Toggle Fullscreen" style="margin-right: 6px;">
+        <i class="ph ph-corners-out" id="fullscreen-icon"></i>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle Day/Night Mode">
+        <i class="ph ph-moon" id="theme-icon"></i>
+      </button>
+    </div>
+  </header>
+
+  <nav id="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('dashboard')" id="nav-dashboard">
+      <span class="nav-tab-icon"><i class="ph ph-squares-four"></i></span>
+      <span>Dashboard</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('map')" id="nav-map">
+      <span class="nav-tab-icon"><i class="ph ph-map-trifold"></i></span>
+      <span>Chart</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('settings')" id="nav-settings">
+      <span class="nav-tab-icon"><i class="ph ph-gear"></i></span>
+      <span>Settings</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('trip')" id="nav-trip">
+      <span class="nav-tab-icon"><i class="ph ph-chart-line-up"></i></span>
+      <span>Trip</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('calibration')" id="nav-calibration">
+      <span class="nav-tab-icon"><i class="ph ph-compass-tool"></i></span>
+      <span>Calibra</span>
+    </button>
+  </nav>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="view-dashboard" class="view-container active">
+    <div class="dashboard-grid">
+      
+      <!-- Compass + Mini Map Panel -->
+      <div class="instrument-panel">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="ph ph-compass"></i></div>
+          <span>Heading</span>
+        </div>
+        <div class="compass-container">
+          <div class="compass-left">
+            <div class="system-status" style="margin-bottom: 5px; z-index: 10;">
+              <div class="status-pill">
+                <div class="status-dot offline" id="controller-dot"></div>
+                <span id="controller-text">Controller</span>
+              </div>
+              <div class="status-pill">
+                <div class="status-dot offline" id="sensor-dot"></div>
+                <span id="sensor-text">Sensors</span>
+              </div>
+            </div>
+            <div class="hud-compass">
+              <div class="compass-ring" id="compass-ring">
+                <div class="compass-degree north"><span>N</span></div>
+                <div class="compass-degree"><span>30</span></div>
+                <div class="compass-degree"><span>60</span></div>
+                <div class="compass-degree major"><span>E</span></div>
+                <div class="compass-degree"><span>120</span></div>
+                <div class="compass-degree"><span>150</span></div>
+                <div class="compass-degree major"><span>S</span></div>
+                <div class="compass-degree"><span>210</span></div>
+                <div class="compass-degree"><span>240</span></div>
+                <div class="compass-degree major"><span>W</span></div>
+                <div class="compass-degree"><span>300</span></div>
+                <div class="compass-degree"><span>330</span></div>
+              </div>
+              <div class="compass-cardinal n">N</div>
+              <div class="compass-cardinal e">E</div>
+              <div class="compass-cardinal s">S</div>
+              <div class="compass-cardinal w">W</div>
+              <div class="compass-marker"></div>
+              <div class="bearing-bug" id="bearing-bug"></div>
+              <div class="compass-value" id="heading-display">--<span>°</span></div>
+            </div>
+            <div class="compass-labels">
+              <span>Port</span>
+              <span>Starboard</span>
+            </div>
+          </div>
+          <!-- Mini mappa affiancata -->
+          <div class="mini-map-wrapper">
+            <div id="mini-map"></div>
+            <div class="mini-map-footer">
+              <span class="mini-map-label">Route Map</span>
+              <button class="btn-minimap-expand" onclick="switchTab('map')" title="Apri mappa grande">
+                <i class="ph ph-arrows-out"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rudder Panel -->
+      <div class="instrument-panel">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="ph ph-crosshair"></i></div>
+          <span>Rudder Control</span>
+        </div>
+        <div class="rudder-section">
+          <div class="rudder-gauge-container">
+            <div class="rudder-gauge" id="rudder-gauge">
+              <div class="rudder-bar-container">
+                <div class="rudder-bar-fill" id="rudder-bar-fill"></div>
+              </div>
+              <div class="rudder-scale"></div>
+              <div class="rudder-ticks">
+                <div class="rudder-tick"></div>
+                <div class="rudder-tick"></div>
+                <div class="rudder-tick center"></div>
+                <div class="rudder-tick"></div>
+                <div class="rudder-tick"></div>
+              </div>
+              <div class="rudder-center-mark"></div>
+              <div class="rudder-needle" id="rudder-needle"></div>
+              <div class="rudder-value-display" id="rudder-display">0°</div>
+            </div>
+            <div class="rudder-labels">
+              <span>-45°</span><span>CENTER</span><span>+45°</span>
+            </div>
+          </div>
+          <div class="control-grid">
+            <button class="btn-control" id="btn-left"><i class="ph ph-caret-left"></i></button>
+            <button class="btn-control btn-center" id="btn-center"><i class="ph ph-dot-outline"></i></button>
+            <button class="btn-control" id="btn-right"><i class="ph ph-caret-right"></i></button>
+          </div>
+          <button class="btn-emergency" id="btn-emergency">
+            <i class="ph ph-warning-circle"></i><span>Emergency Stop</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- GPS Data Panel -->
+      <div class="instrument-panel">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="ph ph-airplane-tilt"></i></div>
+          <span>GPS Data</span>
+        </div>
+        
+        <div class="attitude-panel-layout">
+          <!-- Digital Data Grid -->
+          <div class="attitude-data-left grid-layout">
+            <div class="mini-data-box">
+              <div class="mini-data-label">SPEED</div>
+              <div class="mini-data-value"><span id="speed-display">0.0</span><span class="mini-data-unit">kn</span></div>
+            </div>
+            <div class="mini-data-box">
+              <div class="mini-data-label">SATS</div>
+              <div class="mini-data-value" id="sat-display">0</div>
+            </div>
+            <div class="mini-data-box">
+              <div class="mini-data-label">LAT</div>
+              <div class="mini-data-value micro" id="lat-display">--</div>
+            </div>
+            <div class="mini-data-box">
+              <div class="mini-data-label">LON</div>
+              <div class="mini-data-value micro" id="lon-display">--</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="trust-indicator" style="margin-top: 12px; padding: 10px;">
+          <div class="trust-header" style="margin-bottom: 6px;">
+            <span class="trust-label">Heading Source</span>
+            <span class="trust-icon" id="trust-icon" style="padding: 2px 6px; font-size: 14px;"><i class="ph ph-compass"></i></span>
+          </div>
+          <div class="trust-bar-container" style="margin-bottom: 4px;">
+            <div class="trust-bar compass" id="trust-bar" style="width: 0%"></div>
+          </div>
+          <div class="trust-text" id="trust-text" style="font-size: 10px;">Waiting for data...</div>
+        </div>
+      </div>
+
+      <!-- Autopilot Panel -->
+      <div class="instrument-panel">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="ph ph-robot"></i></div>
+          <span>Autopilot System</span>
+        </div>
+        <div class="autopilot-section">
+          <div class="autopilot-status">
+            <div class="ap-status-label">Current Status</div>
+            <div class="ap-mode-display" id="ap-status">DISATTIVATO</div>
+          </div>
+          <button class="btn-ap-start" id="btn-ap-start">
+            <i class="ph ph-play-circle"></i><span>Engage Heading Hold</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MAP VIEW -->
+  <div id="view-map" class="view-container">
+    <div id="map"></div>
+
+    <!-- PANNELLO OFFLINE MAPS -->
+    <div id="offline-panel" style="
+      display: none; position: absolute; top: 70px; right: 12px; z-index: 2000;
+      background: var(--glass-bg); backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color); border-radius: 14px;
+      padding: 14px; width: 240px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    ">
+      <div style="font-family:'Rajdhani',sans-serif; font-size:13px; font-weight:700; color:var(--accent-primary); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+        <span><i class="ph ph-cloud-arrow-down"></i> Mappe Offline</span>
+        <button onclick="document.getElementById('offline-panel').style.display='none'" style="background:none; border:none; color:var(--text-muted); font-size:18px; cursor:pointer; padding:0; box-shadow:none; text-transform:none; letter-spacing:0;"><i class="ph ph-x"></i></button>
+      </div>
+      <div style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">
+        Zoom da scaricare:
+        <select id="offline-zoom-max" style="background:var(--bg-tertiary); border:1px solid var(--border-color); color:var(--text-primary); border-radius:6px; padding:4px 8px; font-size:11px; margin-left:6px;">
+          <option value="15">15 (leggero)</option>
+          <option value="16">16</option>
+          <option value="17" selected>17 (consigliato)</option>
+          <option value="18">18</option>
+          <option value="19">19 (HD)</option>
+        </select>
+      </div>
+      <div id="offline-estimate" style="font-size:11px; color:var(--text-secondary); background:var(--bg-tertiary); border-radius:8px; padding:8px; margin-bottom:12px; text-align:center;">
+        Imposta l'area visibile sulla mappa, poi stima i tile
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button onclick="estimateTiles()" style="height:40px; border-radius:10px; background:linear-gradient(135deg,rgba(0,212,255,0.2),rgba(0,212,255,0.1)); color:var(--accent-primary); border:1px solid var(--border-color); font-size:12px;">
+          <i class="ph ph-calculator"></i> Stima Tile
+        </button>
+        <button id="btn-download-tiles" onclick="downloadTiles()" style="height:40px; border-radius:10px; background:linear-gradient(135deg,#00c853,#00e676); color:#000; border:none; font-size:12px;" disabled>
+          <i class="ph ph-cloud-arrow-down"></i> Scarica Area Visibile
+        </button>
+        <button onclick="deleteTiles()" style="height:40px; border-radius:10px; background:linear-gradient(135deg,#ff9100,#ff6d00); color:#fff; border:none; font-size:12px;">
+          <i class="ph ph-trash"></i> Elimina Area Visibile
+        </button>
+        <button onclick="clearAllTiles()" style="height:40px; border-radius:10px; background:linear-gradient(135deg,#d32f2f,#ff3d71); color:#fff; border:none; font-size:12px;">
+          <i class="ph ph-bomb"></i> Svuota Cache Totale
+        </button>
+      </div>
+      <div id="offline-progress" style="display:none; margin-top:12px;">
+        <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;" id="offline-progress-label">Download in corso...</div>
+        <div style="height:6px; background:var(--bg-secondary); border-radius:3px; overflow:hidden; margin-bottom:8px;">
+          <div id="offline-progress-bar" style="height:100%; width:0%; background:linear-gradient(90deg,var(--accent-primary),var(--accent-secondary)); border-radius:3px; transition:width 0.3s ease;"></div>
+        </div>
+        <button onclick="stopDownloadTiles()" style="width:100%; height:32px; border-radius:8px; background:linear-gradient(135deg,#d32f2f,#ff3d71); color:#fff; border:none; font-size:12px; cursor:pointer;">
+          <i class="ph ph-stop-circle"></i> Interrompi
+        </button>
+      </div>
+      <div id="offline-cache-info" style="font-size:10px; color:var(--text-muted); margin-top:10px; text-align:center;">
+        Cache: calcolando...
+      </div>
+    </div>
+
+    <div class="map-hud">
+      <div class="map-info-item">
+        <div class="status-dot offline" id="gps-dot"></div>
+        <span id="gps-sat-count">0 Sat</span>
+      </div>
+      <div class="map-info-item">
+        <i class="ph ph-lightning"></i>
+        <span class="map-info-value" id="map-speed">0.0</span>
+        <span>kn</span>
+      </div>
+      <div class="map-info-item">
+        <span class="map-info-value" id="map-nav-status">--</span>
+      </div>
+      <button id="btn-follow-boat" class="map-info-item" onclick="toggleFollowBoat()" style="background: rgba(0, 212, 255, 0.2); border: 1px solid rgba(0, 212, 255, 0.5); border-radius: 8px; cursor: pointer; padding: 6px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s;">
+        <i class="ph ph-crosshair"></i> Seguendo
+      </button>
+      <button onclick="toggleOfflinePanel()" style="background: rgba(0, 212, 255, 0.15); border: 1px solid rgba(0, 212, 255, 0.4); border-radius: 8px; cursor: pointer; padding: 6px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent-primary);" title="Gestione mappe offline">
+        <i class="ph ph-cloud-arrow-down"></i>
+      </button>
+    </div>
+    <div class="map-controls">
+      <div class="waypoint-info">
+        <div class="wp-info-item"><div class="wp-info-label">Waypoint</div><div class="wp-info-value" id="current-wp">-</div></div>
+        <div class="wp-info-item"><div class="wp-info-label">Distance</div><div class="wp-info-value" id="wp-distance">-</div></div>
+        <div class="wp-info-item"><div class="wp-info-label">Bearing</div><div class="wp-info-value" id="wp-bearing">-</div></div>
+      </div>
+      <div class="map-action-buttons">
+        <button class="btn-map-action btn-nav-start" id="btn-start-nav"><i class="ph ph-play"></i><span>Start Nav</span></button>
+        <button class="btn-map-action btn-nav-stop" id="btn-stop-nav"><i class="ph ph-stop"></i><span>Stop Nav</span></button>
+        <button class="btn-map-action btn-menu" onclick="toggleWpDrawer()"><i class="ph ph-list"></i></button>
+      </div>
+      <div id="wp-drawer">
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+          <input type="text" id="wp-name-input" placeholder="Waypoint Name" value="WP1" style="flex: 1; padding: 10px; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; font-size: 13px;">
+          <button onclick="if(confirm('Reset all reached status?')) send('reset_reached')" style="padding: 10px 16px; background: var(--accent-warning); color: #000; border: none; border-radius: 8px; font-weight: 700; font-size: 12px;">RESET</button>
+          <button onclick="if(confirm('Clear all waypoints?')) send('clear_wps')" style="padding: 10px 16px; background: var(--accent-danger); color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 12px;">CLEAR</button>
+        </div>
+        <div id="waypoint-list"></div>
+      </div>    </div>
+  </div>
+
+  <!-- SETTINGS VIEW -->
+  <div id="view-settings" class="view-container">
+    <div class="settings-container">
+      <div class="settings-section" id="profileSection">
+        <div class="section-title">
+          <div class="section-title-icon"><i class="ph ph-boat"></i></div>
+          <span>Profilo Barca</span>
+          <span id="activeProfileBadge" style="display: none; background: linear-gradient(135deg, #00d4ff 0%, #0ea5e9 100%); color: #000; padding: 3px 10px; border-radius: 12px; font-size: 10px; margin-left: 10px; font-weight: 700;"><i class="ph ph-star"></i> <span id="activeProfileName">-</span></span>
+        </div>
+        <div id="savedProfilesContainer" style="margin-top: 15px; padding: 14px; background: var(--bg-tertiary); border-radius: 12px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; font-weight: 600; letter-spacing: 0.5px;"><i class="ph ph-folder"></i> Profili Salvati</div>
+          <div class="param-row" style="margin-bottom: 14px; padding: 0 0 14px 0;">
+            <span class="param-label">Carica / Cancella</span>
+            <div class="param-controls">
+              <select class="param-input" id="savedProfilesSelect" style="flex: 1; min-width: 150px; text-align: left; padding-left: 12px;"><option value="">-- Parametri Attuali --</option></select>
+              <button class="btn-set" onclick="loadNamedProfileFromSelect()" style="background: linear-gradient(135deg, #00e676 0%, #00c853 100%); color: #000; font-weight: 600;">CARICA</button>
+              <button class="btn-set" onclick="deleteNamedProfileFromSelect()" style="background: #ff4444; color: white; padding: 10px 14px;"><i class="ph ph-trash"></i></button>
+              <button class="btn-set" onclick="clearAllProfiles()" style="background: #aa0000; color: white; padding: 10px 14px; font-size: 10px;" title="Cancella TUTTI i profili"><i class="ph ph-bomb"></i></button>
+              <button class="btn-set" onclick="debugProfiles()" style="background: #444; color: white; padding: 10px 14px; font-size: 10px;" title="Debug console"><i class="ph ph-bug"></i></button>
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-color); padding-top: 14px;">
+            <div style="font-size: 10px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500;"><i class="ph ph-floppy-disk"></i> Salva configurazione attuale</div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="newProfileName" placeholder="Nome profilo (es. 'Mia Barca')" style="flex: 1; padding: 12px; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 10px; font-size: 13px; transition: all 0.2s;">
+              <button class="btn-set" onclick="saveNamedProfile()" style="background: linear-gradient(135deg, #00d4ff 0%, #0ea5e9 100%); color: #000; font-weight: 600; white-space: nowrap; padding: 12px 20px;">SALVA</button>
+            </div>
+          </div>
+        </div>
+        <div id="defaultInfo" style="margin-top: 10px; padding: 8px; background: var(--bg-tertiary); border-radius: 6px; font-size: 11px; color: var(--text-muted);"><i class="ph ph-clipboard-text"></i> Parametri default: <strong>Gozzo 7m</strong> - Modificabili e salvabili come nuovo profilo</div>
+        <div id="profileDetails" style="margin-top: 16px; padding: 16px; background: var(--bg-tertiary); border-radius: 12px; font-size: 13px; position: relative; border: 1px solid var(--border-color);">
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; color: var(--text-secondary);">
+            <div><strong style="color: var(--text-primary);">L1 Period:</strong> <span id="profL1">10.0</span>s</div>
+            <div><strong style="color: var(--text-primary);">Max Rudder:</strong> <span id="profRudder">22</span>°</div>
+            <div><strong style="color: var(--text-primary);">Kp:</strong> <span id="profKp">0.30</span></div>
+            <div><strong style="color: var(--text-primary);">Ki:</strong> <span id="profKi">0.02</span></div>
+            <div><strong style="color: var(--text-primary);">Kd:</strong> <span id="profKd">0.10</span></div>
+            <div><strong style="color: var(--text-primary);">WP Radius:</strong> <span id="profWp">15</span>m</div>
+            <div><strong style="color: var(--text-primary);">GPS Min:</strong> <span id="profGpsMin">1.5</span>kn</div>
+          </div>
+        </div>
+        <div id="customActions" style="margin-top: 12px; display: flex; gap: 8px;">
+          <button class="btn-set" onclick="resetToDefaultProfile()" style="background: #666; flex: 1;"><i class="ph ph-arrow-counter-clockwise"></i> Reset Default</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="section-title"><div class="section-title-icon"><i class="ph ph-gear"></i></div><span>PID Controller</span></div>
+        <div class="param-row"><span class="param-label">Kp (Proportional)</span><div class="param-controls"><input class="param-input" id="inputKp" type="number" step="0.01"><button class="btn-set" onclick="setParam('kp')">SET</button></div></div>
+        <div class="param-row"><span class="param-label">Ki (Integral)</span><div class="param-controls"><input class="param-input" id="inputKi" type="number" step="0.001"><button class="btn-set" onclick="setParam('ki')">SET</button></div></div>
+        <div class="param-row"><span class="param-label">Kd (Derivative)</span><div class="param-controls"><input class="param-input" id="inputKd" type="number" step="0.01"><button class="btn-set" onclick="setParam('kd')">SET</button></div></div>
+        <div class="param-row"><span class="param-label">L1 Period (Response Time)</span><div class="param-controls"><input class="param-input" id="inputL1Period" type="number" step="1"><button class="btn-set" onclick="setParam('l1_period')">SET</button></div></div>
+        <div class="param-row"><span class="param-label">Rudder Tolerance (°)</span><div class="param-controls"><input class="param-input" id="inputPidTolerance" type="number" step="0.1"><button class="btn-set" onclick="setParam('pid_tolerance')">SET</button></div></div>
+        <div class="param-row"><span class="param-label">Isteresi Timone (Fattore)</span><div class="param-controls"><input class="param-input" id="inputHysteresisFactor" type="number" step="0.1" min="1.0" max="3.0"><button class="btn-set" onclick="setParam('hysteresis_factor')">SET</button></div></div>
+        <div class="param-row"><span class="param-label">Heading Tolerance (°)</span><div class="param-controls"><input class="param-input" id="inputHeadingTolerance" type="number" step="1"><button class="btn-set" onclick="setParam('heading_tolerance')">SET</button></div></div>
+        <div class="param-row"><span class="param-label">Cross-track Dead Zone (m)</span><div class="param-controls"><input class="param-input" id="inputXtrackDeadZone" type="number" step="1"><button class="btn-set" onclick="setParam('xtrack_dead_zone')">SET</button></div></div>
+        <div class="param-row"><span class="param-label">Waypoint Radius (m)</span><div class="param-controls"><input class="param-input" id="inputWaypointRadius" type="number" step="1"><button class="btn-set" onclick="setParam('waypoint_radius')">SET</button></div></div>
+      </div>
+
+      <div class="settings-section">
+        <div class="section-title"><div class="section-title-icon"><i class="ph ph-wrench"></i></div><span>Motor Settings</span></div>
+        <div class="param-row"><span class="param-label">Min PWM Speed</span><div class="param-controls"><input class="param-input" id="inputMinPwmSpeed" type="number" step="1"><button class="btn-set" onclick="setParam('min_pwm_speed')">SET</button></div></div>
+        <div class="param-row"><span class="param-label">Motor Aggressiveness (%)</span><div class="param-controls"><input class="param-input" id="inputMotorAggressiveness" type="number" step="1"><button class="btn-set" onclick="setParam('motor_aggressiveness')">SET</button></div></div>
+        <div class="param-row"><span class="param-label">Max Rudder Angle (°)</span><div class="param-controls"><input class="param-input" id="inputMaxRudderAngle" type="number" step="1"><button class="btn-set" onclick="setParam('max_rudder_angle')">SET</button></div></div>
+      </div>
+
+      <div class="settings-section">
+        <div class="section-title"><div class="section-title-icon"><i class="ph ph-crosshair"></i></div><span>Calibration</span></div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;"> [HWT905]
+          <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Sensore IMU:</span>
+          <span id="imu-type-badge" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 13px; color: var(--accent-success); background: rgba(0,230,118,0.1); padding: 3px 10px; border-radius: 8px; border: 1px solid rgba(0,230,118,0.3);">---</span>
+          <span id="ahrs-ready-badge" style="display:none; font-size: 10px; color: var(--accent-success); font-weight: 600;">✓ AHRS OK</span>
+        </div>
+        <div class="calibration-display">
+          <div class="cal-item"><div class="cal-label">AHRS Conv.</div><div class="cal-value" id="cal-sys">0</div></div>
+          <div class="cal-item"><div class="cal-label">Giroscopio</div><div class="cal-value" id="cal-gyro">0</div></div>
+          <div class="cal-item"><div class="cal-label">Accelerom.</div><div class="cal-value" id="cal-accel">0</div></div>
+          <div class="cal-item"><div class="cal-label">RM3100/Mag</div><div class="cal-value" id="cal-mag">0</div></div>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Offset Bussola</span>
+          <div class="param-controls">
+            <span id="compass-offset-display" style="font-family: 'Rajdhani'; font-weight: 700; color: var(--accent-primary); min-width: 70px; font-size: 16px;">--</span>
+            <button class="btn-set" id="btn-cal-gps" onclick="startGpsCalibration()" title="Calibra l'offset usando la rotta GPS. Richiede velocità > 3 nodi e rotta stabile." style="background: linear-gradient(135deg, #00d4ff 0%, #0ea5e9 100%); color: #000; font-weight: 600;">CAL GPS</button>
+            <button class="btn-set" onclick="send('reset_offset')" style="background: #666;">RESET</button>
+          </div>
+        </div>
+        <button class="btn-emergency" style="background: var(--accent-secondary); margin-top: 18px; box-shadow: 0 4px 20px rgba(14, 165, 233, 0.35);" onclick="send('setzero')">
+          <i class="ph ph-target"></i><span>Set Rudder Zero</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIP COMPUTER VIEW -->
+  <div id="view-trip" class="view-container">
+    <div class="trip-stats">
+      <div class="stat-card"><div class="stat-icon"><i class="ph ph-clock"></i></div><div class="stat-value" id="trip-time">00:00:00</div><div class="stat-label">Trip Time</div></div>
+      <div class="stat-card"><div class="stat-icon"><i class="ph ph-path"></i></div><div class="stat-value" id="trip-distance">0.0</div><div class="stat-label">Distance (nm)</div></div>
+      <div class="stat-card"><div class="stat-icon"><i class="ph ph-gauge"></i></div><div class="stat-value" id="avg-speed">0.0</div><div class="stat-label">Avg Speed (kn)</div></div>
+      <div class="stat-card"><div class="stat-icon"><i class="ph ph-rocket-launch"></i></div><div class="stat-value" id="max-speed">0.0</div><div class="stat-label">Max Speed (kn)</div></div>
+      <div class="stat-card"><div class="stat-icon"><i class="ph ph-flag-checkered"></i></div><div class="stat-value" id="wp-completed">0</div><div class="stat-label">Waypoints</div></div>
+      <div class="stat-card"><div class="stat-icon"><i class="ph ph-arrows-left-right"></i></div><div class="stat-value" id="rudder-movements">0</div><div class="stat-label">Rudder Moves</div></div>
+    </div>
+    <div class="speed-chart-container">
+      <div class="chart-header">
+        <div class="chart-title"><i class="ph ph-chart-line"></i><span>Speed History</span></div>
+        <span style="font-size: 11px; color: var(--text-muted);">Last 5 minutes</span>
+      </div>
+      <canvas id="speedChart"></canvas>
+    </div>
+    <div style="padding: 20px;">
+      <button class="btn-emergency" style="background: var(--accent-warning); box-shadow: 0 4px 20px rgba(255, 179, 0, 0.35);" onclick="resetTrip()">
+        <i class="ph ph-arrow-counter-clockwise"></i><span>Reset Trip Data</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- CALIBRATION VIEW -->
+  <div id="view-calibration" class="view-container">
+    <div class="settings-section" style="margin: 16px;">
+      <div class="section-title">
+        <div class="section-title-icon"><i class="ph ph-compass-tool"></i></div>
+        <span>Calibrazione Magnetometro RM3100</span>
+      </div>
+
+      <!-- Stato sessione -->
+      <div id="cal-status-bar" style="
+        padding: 10px 16px;
+        border-radius: 10px;
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-align: center;
+        margin-bottom: 16px;
+      ">IN ATTESA — Premi Avvia per iniziare</div>
+
+      <!-- Scatter plot XY -->
+      <div style="position: relative; width: 100%; aspect-ratio: 1; max-width: 320px; margin: 0 auto 20px;">
+        <div id="cal-ring" style="
+          position: absolute; inset: 0;
+          border-radius: 50%;
+          border: 6px solid #555;
+          transition: border-color 0.5s ease, box-shadow 0.5s ease;
+          pointer-events: none;
+          z-index: 2;
+        "></div>
+        <canvas id="cal-scatter" style="
+          width: 100%; height: 100%;
+          border-radius: 50%;
+          background: var(--bg-card);
+          display: block;
+        "></canvas>
+      </div>
+
+      <!-- Indicatore copertura -->
+      <div style="text-align: center; margin-bottom: 20px;">
+        <span style="font-family: 'Rajdhani', sans-serif; font-size: 13px; color: var(--text-secondary);">COPERTURA ANGOLARE</span><br>
+        <span id="cal-coverage" style="font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; color: var(--accent-primary);">0%</span>
+      </div>
+
+      <!-- Pulsanti -->
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <button id="btn-cal-start" class="btn btn-nav-start" onclick="startMagCal()" style="min-width: 140px;">
+          <i class="ph ph-play"></i> Avvia
+        </button>
+        <button id="btn-cal-save" class="btn btn-nav-start" onclick="saveMagCal()" disabled style="min-width: 140px; opacity: 0.4;">
+          <i class="ph ph-floppy-disk"></i> Salva e Applica
+        </button>
+        <button id="btn-cal-cancel" class="btn btn-nav-stop" onclick="cancelMagCal()" disabled style="min-width: 140px; opacity: 0.4;">
+          <i class="ph ph-x"></i> Annulla
+        </button>
+      </div>
+
+      <!-- Info campioni -->
+      <div style="text-align: center; margin-top: 16px; font-size: 12px; color: var(--text-secondary);">
+        Campioni raccolti: <span id="cal-sample-count">0</span>
+      </div>
+    </div>
+  </div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ================= THEME =================
+function initTheme() {
+  const savedTheme = localStorage.getItem('continental-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  updateThemeIcon(savedTheme);
+}
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('continental-theme', newTheme);
+  updateThemeIcon(newTheme);
+  drawSpeedChart();
+}
+function updateThemeIcon(theme) {
+  document.getElementById('theme-icon').className = theme === 'dark' ? 'ph ph-moon' : 'ph ph-sun';
+}
+
+// ================= FULLSCREEN =================
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.warn(`Error attempting to enable fullscreen: ${err.message}`);
+    });
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+
+document.addEventListener('fullscreenchange', () => {
+  const icon = document.getElementById('fullscreen-icon');
+  if (icon) {
+    if (document.fullscreenElement) {
+      icon.className = 'ph ph-corners-in';
+    } else {
+      icon.className = 'ph ph-corners-out';
+    }
+  }
+});
+
+// ================= SPEED CHART =================
+let speedHistory = [];
+const MAX_SPEED_POINTS = 300;
+
+function updateSpeedChart(speed) {
+  speedHistory.push({ time: Date.now(), speed: speed });
+  const cutoff = Date.now() - 300000;
+  speedHistory = speedHistory.filter(p => p.time > cutoff);
+  if (speedHistory.length > MAX_SPEED_POINTS) speedHistory = speedHistory.slice(-MAX_SPEED_POINTS);
+  drawSpeedChart();
+}
+
+function drawSpeedChart() {
+  const canvas = document.getElementById('speedChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width; canvas.height = rect.height;
+  const width = canvas.width, height = canvas.height, padding = 20;
+  ctx.clearRect(0, 0, width, height);
+  if (speedHistory.length < 2) return;
+  const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+  const lineColor = isDark ? '#00d4ff' : '#0077b6';
+  const fillColor = isDark ? 'rgba(0, 212, 255, 0.1)' : 'rgba(0, 119, 182, 0.1)';
+  const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+  const textColor = isDark ? '#8aa4c8' : '#718096';
+  const speeds = speedHistory.map(p => p.speed);
+  const maxSpd = Math.max(1, ...speeds);
+  const minTime = speedHistory[0].time, maxTime = speedHistory[speedHistory.length - 1].time;
+  ctx.strokeStyle = gridColor; ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = padding + (height - 2 * padding) * (1 - i / 4);
+    ctx.beginPath(); ctx.moveTo(padding, y); ctx.lineTo(width - padding, y); ctx.stroke();
+    ctx.fillStyle = textColor; ctx.font = '10px Inter'; ctx.textAlign = 'right';
+    ctx.fillText((maxSpd * i / 4).toFixed(1), padding - 5, y + 3);
+  }
+  ctx.beginPath(); ctx.strokeStyle = lineColor; ctx.lineWidth = 2;
+  speedHistory.forEach((point, i) => {
+    const x = padding + (width - 2 * padding) * (point.time - minTime) / (maxTime - minTime || 1);
+    const y = padding + (height - 2 * padding) * (1 - point.speed / maxSpd);
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+  ctx.lineTo(padding + (width - 2 * padding), height - padding);
+  ctx.lineTo(padding, height - padding);
+  ctx.closePath(); ctx.fillStyle = fillColor; ctx.fill();
+  const lastPoint = speedHistory[speedHistory.length - 1];
+  const lastX = padding + (width - 2 * padding);
+  const lastY = padding + (height - 2 * padding) * (1 - lastPoint.speed / maxSpd);
+  ctx.beginPath(); ctx.arc(lastX, lastY, 4, 0, Math.PI * 2);
+  ctx.fillStyle = lineColor; ctx.fill();
+  ctx.shadowBlur = 10; ctx.shadowColor = lineColor; ctx.stroke(); ctx.shadowBlur = 0;
+}
+
+// ================= CONFIG =================
+const ESP32_IP = "192.168.4.1"; // AP mode fisso — sostituire con cms-naviga.local quando mDNS attivo
+
+let ws;
+let map, boatMarker, routeLine, distanceRing;
+let miniMap, miniBoatMarker;
+let waypoints = [];
+let boatPosition = { lat: 41.332, lng: 13.353 };
+let reconnectInterval = null;
+let followBoat = true;
+
+// Variabili per calibrazione GPS
+let currentGpsSpeed = 0;
+let currentGpsCourse = 0;
+let isGpsValid = false;
+let calibrationTimer = null;
+
+// Variabili calibrazione Magnetometro
+let magCalActive = false;
+let magSamples = [];
+const CAL_SECTORS = 24; // 24 settori = 15° ciascuno (era 12 = 30°, risoluzione raddoppiata)
+let sectorHit = new Array(CAL_SECTORS).fill(false);
+let calCanvas = null;
+let calCtx = null;
+
+// Variabile per rotazione bussola "unwrapped" (evita scatti su wrap-around 0/360)
+let compassRotation = 0;
+
+let boatTrail = [];
+let trailLine = null;
+const TRAIL_MAX_DISTANCE = 100;
+let lastTrailSampleTime = 0;
+const TRAIL_SAMPLE_INTERVAL = 1000;
+
+let tripStartTime = null, tripDistance = 0, lastTripPosition = null;
+let maxSpeed = 0, speedReadings = [], waypointsCompleted = 0;
+let rudderMoveCount = 0, lastRudderAngle = 0;
+
+// ================= UTILITY =================
+function switchTab(tab) {
+  document.querySelectorAll('.view-container, .nav-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(`view-${tab}`).classList.add('active');
+  document.getElementById(`nav-${tab}`).classList.add('active');
+  
+  if (tab !== 'calibration' && typeof magCalActive !== 'undefined' && magCalActive) cancelMagCal();
+  if (tab === 'map') setTimeout(() => map && map.invalidateSize(), 100);
+  if (tab === 'dashboard') setTimeout(() => miniMap && miniMap.invalidateSize(), 100);
+  if (tab === 'trip') setTimeout(drawSpeedChart, 100);
+}
+function toggleWpDrawer() {
+  const drawer = document.getElementById('wp-drawer');
+  drawer.style.display = drawer.style.display === 'block' ? 'none' : 'block';
+}
+function setControllerStatus(message, isConnected = false) {
+  const dot = document.getElementById('controller-dot');
+  const text = document.getElementById('controller-text');
+  if (message === 'Getting IP...' || message === 'Connecting...') {
+    dot.className = 'status-dot connecting';
+    text.innerHTML = '<span class="connection-spinner"></span> ' + message;
+  } else if (isConnected) {
+    dot.className = 'status-dot online'; text.textContent = message;
+  } else {
+    dot.className = 'status-dot offline'; text.textContent = message;
+  }
+}
+
+// ================= TRUST INDICATOR =================
+function updateTrustIndicator(weight, source) {
+  const bar = document.getElementById('trust-bar');
+  const icon = document.getElementById('trust-icon');
+  const text = document.getElementById('trust-text');
+  bar.style.width = Math.min(100, Math.max(0, (weight / 0.9) * 100)) + '%';
+  switch(source) {
+    case 'GPS_BUSSOLA_KO': icon.innerHTML = '<i class="ph ph-warning-octagon"></i>'; text.textContent = 'GPS ONLY - Bussola decalibrata!'; bar.className = 'trust-bar gps-forced'; bar.style.width = '100%'; break;
+    case 'GPS_FORZATO': icon.innerHTML = '<i class="ph ph-warning"></i>'; text.textContent = 'GPS FORZATO - Bussola inaffidabile'; bar.className = 'trust-bar gps-forced'; break;
+    case 'BUSSOLA': icon.innerHTML = '<i class="ph ph-compass"></i>'; text.textContent = 'RM3100 Magnetico (alta precisione)'; bar.className = 'trust-bar compass'; break;
+    case 'GPS': icon.innerHTML = '<i class="ph ph-satellite-dish"></i>'; text.textContent = 'GPS Course (alta velocità)'; bar.className = 'trust-bar gps'; break;
+    default: icon.innerHTML = '<i class="ph ph-compass"></i><i class="ph ph-satellite-dish" style="margin-left:-5px;"></i>'; text.textContent = 'Fusione GPS + RM3100 (ottimale)'; bar.className = 'trust-bar fusion'; break;
+  }
+}
+
+// ================= INIT =================
+document.addEventListener('DOMContentLoaded', () => {
+  getIpAndConnect();
+});
+
+window.onload = function() {
+  initTheme();
+  try { initMap(); initMiniMap(); } catch(e) { console.error("Mappe non caricate (no internet)"); }
+  setupControls();
+  startTripComputer();
+  window.addEventListener('resize', drawSpeedChart);
+};
+
+function getIpAndConnect() {
+  setControllerStatus("Connecting...");
+  connect(ESP32_IP);
+}
+
+function connect(ip) {
+  if (reconnectInterval) { clearInterval(reconnectInterval); reconnectInterval = null; }
+  ws = new WebSocket(`ws://${ip}:81`);
+  ws.onopen = () => { setControllerStatus('Connected', true); setTimeout(() => { send('get_profiles'); send('list_named_profiles'); }, 500); };
+  ws.onclose = () => { setControllerStatus('Disconnected'); if (!reconnectInterval) reconnectInterval = setInterval(getIpAndConnect, 5000); };
+  ws.onmessage = (e) => { try { updateUI(JSON.parse(e.data)); } catch(err) { console.warn('[WS] Ignorato:', err.message); } };
+  ws.onerror = (err) => { console.error("WS Error:", err); ws.close(); };
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    if (!ws || ws.readyState !== 1) { getIpAndConnect(); }
+  }
+});
+
+function send(cmd, data={}) {
+  if (ws && ws.readyState === 1) ws.send(JSON.stringify({command: cmd, cmd: cmd, ...data}));
+}
+
+// --- FUNZIONE CALIBRAZIONE GPS ---
+function startGpsCalibration() {
+  if (calibrationTimer) return; // Già in corso
+  
+  // 1. Verifiche preliminari
+  if (!isGpsValid) { alert("GPS non valido o segnale debole."); return; }
+  if (currentGpsSpeed < 3.0) { alert("Velocità insufficiente. Naviga a più di 3 nodi per calibrare."); return; }
+  
+  if (!confirm("Avvio calibrazione bussola via GPS.\n\nMantieni la barca DRITTA a velocità costante per 10 secondi.")) return;
+  
+  const btn = document.getElementById('btn-cal-gps');
+  const originalText = btn.innerHTML;
+  const originalBg = btn.style.background;
+  
+  let samples = [];
+  let count = 0;
+  const maxSamples = 20; // 10 secondi (1 campione ogni 500ms)
+  
+  btn.disabled = true;
+  btn.style.background = "var(--accent-warning)";
+  btn.innerHTML = `<i class="ph ph-circle-notch ph-spin"></i> CAL...`;
+  
+  calibrationTimer = setInterval(() => {
+    // Verifica condizioni durante il campionamento
+    if (currentGpsSpeed < 2.5) {
+      clearInterval(calibrationTimer);
+      calibrationTimer = null;
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      btn.style.background = originalBg;
+      alert("Calibrazione annullata: velocità troppo bassa.");
+      return;
+    }
+    
+    samples.push(currentGpsCourse);
+    count++;
+    btn.innerHTML = `<i class="ph ph-circle-notch ph-spin"></i> ${Math.round((count/maxSamples)*100)}%`;
+    
+    if (count >= maxSamples) {
+      clearInterval(calibrationTimer);
+      calibrationTimer = null;
+      
+      // Calcola media vettoriale (gestisce il salto 359-0)
+      let sumX = 0, sumY = 0;
+      samples.forEach(deg => {
+        let rad = deg * Math.PI / 180;
+        sumX += Math.cos(rad);
+        sumY += Math.sin(rad);
+      });
+      
+      let avgRad = Math.atan2(sumY / maxSamples, sumX / maxSamples);
+      let avgDeg = (avgRad * 180 / Math.PI + 360) % 360;
+      
+      // Verifica stabilità: rotta non deve oscillare più di 6°
+      let maxDiff = 0;
+      samples.forEach(deg => {
+        let diff = Math.abs(deg - avgDeg);
+        if (diff > 180) diff = 360 - diff;
+        if (diff > maxDiff) maxDiff = diff;
+      });
+      
+      if (maxDiff > 6.0) { 
+        alert(`Calibrazione fallita: rotta instabile (oscillazione max ${maxDiff.toFixed(1)}°). Mantenere la prua ferma per 10 secondi.`);
+      } else {
+        send('set_north', { value: avgDeg });
+        showToast(`✓ Bussola allineata su ${avgDeg.toFixed(1)}° (media 10s)`);
+      }
+      
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      btn.style.background = originalBg;
+    }
+  }, 500); 
+}
+
+// ================= PROFILES =================
+let currentProfileName = "";
+let savedNamedProfiles = [];
+let pendingProfileName = null;
+
+function validateProfileName(name) {
+  if (!name || name.trim().length === 0) return { valid: false, error: 'Nome obbligatorio' };
+  const existing = savedNamedProfiles.find(p => p.name && p.name.toLowerCase() === name.toLowerCase());
+  if (existing) {
+    let suffix = 1, suggestion;
+    do { suggestion = name + ' (' + suffix + ')'; suffix++; } while (savedNamedProfiles.find(p => p.name && p.name.toLowerCase() === suggestion.toLowerCase()));
+    return { valid: false, error: 'Profilo esiste già', suggestion };
+  }
+  return { valid: true };
+}
+function saveNamedProfile() {
+  const nameInput = document.getElementById('newProfileName');
+  const name = nameInput.value.trim();
+  const validation = validateProfileName(name);
+  if (!validation.valid) { let msg = validation.error; if (validation.suggestion) { msg += '\n\nSuggerimento: "' + validation.suggestion + '"'; } alert(msg); if (validation.suggestion) nameInput.value = validation.suggestion; return; }
+  pendingProfileName = name;
+  if (confirm(`Salvare il profilo "${name}"?`)) send('save_named_profile', {name});
+}
+function loadNamedProfileFromSelect() {
+  const name = document.getElementById('savedProfilesSelect').value;
+  if (!name) { alert('Seleziona un profilo da caricare'); return; }
+  if (confirm(`Caricare il profilo "${name}"?`)) send('load_named_profile', {name});
+}
+function deleteNamedProfileFromSelect() {
+  const name = document.getElementById('savedProfilesSelect').value;
+  if (!name) { alert('Seleziona un profilo da eliminare'); return; }
+  if (confirm(`Eliminare definitivamente il profilo "${name}"?`)) send('delete_named_profile', {name});
+}
+function clearAllProfiles() {
+  if (confirm('⚠️ ATTENZIONE ⚠️\n\nQuesto cancellerà TUTTI i profili salvati in modo irreversibile.\n\nContinuare?')) send('clear_all_profiles');
+}
+function debugProfiles() { send('debug_profiles'); showToast('Debug inviato - controlla console seriale ESP32'); }
+function updateSavedProfilesList(profiles) {
+  savedNamedProfiles = profiles.map(p => typeof p === 'string' ? {name: p} : p);
+  const select = document.getElementById('savedProfilesSelect');
+  select.innerHTML = '<option value="">-- Parametri Attuali --</option>';
+  if (profiles.length === 0) { const o = document.createElement('option'); o.disabled = true; o.textContent = 'Nessun profilo salvato'; select.appendChild(o); return; }
+  profiles.forEach(profile => { const p = typeof profile === 'string' ? {name: profile} : profile; const o = document.createElement('option'); o.value = p.name; o.textContent = '📝 ' + p.name; select.appendChild(o); });
+}
+function showActiveProfile(name) { currentProfileName = name; document.getElementById('activeProfileBadge').style.display = 'inline-block'; document.getElementById('activeProfileName').textContent = name; }
+function hideActiveProfile() { currentProfileName = ""; document.getElementById('activeProfileBadge').style.display = 'none'; }
+function resetToDefaultProfile() { if (confirm('Ripristinare i valori default del gozzo 7m?')) { send('reset_to_default'); hideActiveProfile(); } }
+function showToast(message) {
+  const toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--accent-success);color:#000;padding:14px 28px;border-radius:12px;font-weight:600;z-index:10000;box-shadow:0 8px 24px rgba(0,230,118,0.35);font-size:14px;';
+  toast.textContent = message; document.body.appendChild(toast);
+  setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// ================= UI UPDATE =================
+function updateUI(data) {
+  if (data.type === 'mag_cal_sample') {
+    if (typeof onMagCalSample === 'function') onMagCalSample(data.mx, data.my);
+    return;
+  }
+  if (data.type === 'mag_cal_started') return;
+  if (data.type === 'mag_cal_confirm') {
+    if (typeof onMagCalConfirm === 'function') onMagCalConfirm(data.ok);
+    return;
+  }
+  
+  if (data.type === "calibration_confirm") {
+    if (data.new_offset !== undefined) { let o = data.new_offset; if (o > 180) o -= 360; const s = o >= 0 ? '+' : ''; document.getElementById('compass-offset-display').textContent = s + o.toFixed(2) + '°'; } return;
+  }
+  if (data.type === "profile_applied") {
+    if (data.success && data.current_profile_name) { showToast(data.message || ('✓ Caricato: ' + data.current_profile_name)); showActiveProfile(data.current_profile_name); } else { showToast(data.message || 'Parametri default attivi'); hideActiveProfile(); }
+    ['l1_period','max_rudder','kp','ki','kd','waypoint_radius','gps_min_speed'].forEach(k => { if (data[k] !== undefined) { const el = document.getElementById({l1_period:'profL1',max_rudder:'profRudder',kp:'profKp',ki:'profKi',kd:'profKd',waypoint_radius:'profWp',gps_min_speed:'profGpsMin'}[k]); if(el) el.textContent = data[k].toFixed(k==='ki'?3:k==='l1_period'||k==='gps_min_speed'?1:2); }});
+    send('list_named_profiles'); return;
+  }
+  if (data.type === "named_profile_saved") { if (data.success) { showToast('✓ ' + data.message); if (pendingProfileName === data.name) { document.getElementById('newProfileName').value = ''; pendingProfileName = null; } send('list_named_profiles'); } else { showToast('✗ ' + data.message); pendingProfileName = null; } return; }
+  if (data.type === "named_profile_deleted") { if (data.success) { showToast('✓ ' + data.message); send('list_named_profiles'); send('get_profiles'); } else showToast('✗ ' + data.message); return; }
+  if (data.type === "named_profiles_cleared") { showToast('✓ ' + data.message); updateSavedProfilesList([]); hideActiveProfile(); send('list_named_profiles'); return; }
+  if (data.type === "named_profiles_list") { updateSavedProfilesList(data.profiles || []); return; }
+  if (data.type === "waypoints_list") { if (data.waypoints && Array.isArray(data.waypoints)) { waypoints = data.waypoints; updateMapWaypoints(waypoints); renderWpList(waypoints); } return; }
+  if (data.type === "profile_list") { if (data.current_profile_name) showActiveProfile(data.current_profile_name); else hideActiveProfile(); send('list_named_profiles'); return; }
+
+  if (data.type === "compass_config") {
+    if (data.offset !== undefined) { let o = data.offset; if (o > 180) o -= 360; const s = o >= 0 ? '+' : ''; document.getElementById('compass-offset-display').textContent = s + o.toFixed(2) + '°'; }
+    return;
+  }
+  if (data.type === "position_update") {
+    isGpsValid = data.gps_valid ?? isGpsValid;
+    if (data.speed !== undefined) {
+      currentGpsSpeed = data.speed;
+      document.getElementById('speed-display').textContent = data.speed.toFixed(1);
+      document.getElementById('map-speed').textContent = data.speed.toFixed(1);
+      updateSpeedChart(data.speed);
+      if (data.speed > maxSpeed) {
+        maxSpeed = data.speed;
+        document.getElementById('max-speed').textContent = data.speed.toFixed(1);
+      }
+      speedReadings.push(data.speed);
+      if (speedReadings.length > 100) speedReadings.shift();
+    }
+    if (data.course !== undefined) currentGpsCourse = data.course;
+    
+    // Aggiornamento Waypoint ad ALTA FREQUENZA (5Hz)
+    if (data.current_wp >= 0 && data.target_name) {
+      const wpDistEl = document.getElementById('wp-distance');
+      const wpBearEl = document.getElementById('wp-bearing');
+      const wpNameEl = document.getElementById('current-wp');
+      const bearingBug = document.getElementById('bearing-bug');
+      
+      if (wpNameEl) wpNameEl.textContent = data.target_name;
+      if (wpDistEl) wpDistEl.textContent = data.distance ? data.distance.toFixed(0) + 'm' : '-';
+      if (wpBearEl) wpBearEl.textContent = data.bearing ? data.bearing.toFixed(0) + '°' : '-';
+
+      // Posizionamento del Bearing Bug sulla bussola
+      if (bearingBug && data.bearing !== undefined && data.heading !== undefined) {
+        bearingBug.style.opacity = '1';
+        
+        if (data.target_name === "Rotta Impostata") {
+          bearingBug.classList.add('heading-hold');
+        } else {
+          bearingBug.classList.remove('heading-hold');
+        }
+        
+        let targetRelBearing = data.bearing - data.heading;
+        
+        // Normalizza target tra -180 e 180
+        while (targetRelBearing > 180) targetRelBearing -= 360;
+        while (targetRelBearing <= -180) targetRelBearing += 360;
+        
+        if (bearingBug._currentRotation === undefined) {
+          bearingBug._currentRotation = targetRelBearing;
+        }
+        
+        let diff = targetRelBearing - (bearingBug._currentRotation % 360);
+        while (diff > 180) diff -= 360;
+        while (diff <= -180) diff += 360;
+        
+        bearingBug._currentRotation += diff;
+        bearingBug.style.transform = `rotate(${bearingBug._currentRotation}deg)`;
+      }
+    } else if (data.current_wp === -1) {
+      const wpDistEl = document.getElementById('wp-distance');
+      const wpBearEl = document.getElementById('wp-bearing');
+      const wpNameEl = document.getElementById('current-wp');
+      const bearingBug = document.getElementById('bearing-bug');
+      if (wpNameEl) wpNameEl.textContent = '-';
+      if (wpDistEl) wpDistEl.textContent = '-';
+      if (wpBearEl) wpBearEl.textContent = '-';
+      if (bearingBug) bearingBug.style.opacity = '0';
+    }
+
+    if (data.gps_valid) {
+      updateTripDistance({ lat: data.latitude, lng: data.longitude });
+      const newPosition = { lat: data.latitude, lng: data.longitude };
+
+      // Aggiornamento testuale dashboard
+      const latEl = document.getElementById('lat-display');
+      const lonEl = document.getElementById('lon-display');
+      if (latEl) latEl.textContent = data.latitude.toFixed(6);
+      if (lonEl) lonEl.textContent = data.longitude.toFixed(6);
+
+      function gpsHaversine(lat1, lon1, lat2, lon2) { const R=6371000,dLat=(lat2-lat1)*Math.PI/180,dLon=(lon2-lon1)*Math.PI/180,a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2; return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)); }
+      const jumpDistance = gpsHaversine(boatPosition.lat, boatPosition.lng, newPosition.lat, newPosition.lng);
+      if (jumpDistance < 20 && boatPosition.lat !== 41.332) {
+        boatPosition = { lat: boatPosition.lat + (newPosition.lat - boatPosition.lat) * 0.5, lng: boatPosition.lng + (newPosition.lng - boatPosition.lng) * 0.5 };
+      } else { boatPosition = newPosition; }
+      if (boatMarker) boatMarker.setLatLng(boatPosition);
+      if (distanceRing) distanceRing.setLatLng(boatPosition);
+      updateMiniBoat(boatPosition.lat, boatPosition.lng);
+      updateBoatTrail(boatPosition);
+      if (map && followBoat) map.setView(boatPosition, 16);
+    }
+    if (data.heading !== undefined) {
+      // Unwrap: calcola la rotazione continua evitando salti di ~360 gradi
+      // quando l'heading attraversa il confine 0/360
+      let target = -data.heading;
+      let delta = target - (compassRotation % 360);
+      if (delta > 180) delta -= 360;
+      if (delta < -180) delta += 360;
+      compassRotation += delta;
+
+      document.getElementById('compass-ring').style.transform = `rotate(${compassRotation}deg)`;
+      const hdgDisp = document.getElementById('heading-display');
+      if (hdgDisp) hdgDisp.innerHTML = ((Math.round(data.heading) % 360) + 360) % 360 + '<span>°</span>';
+    }
+    if (data.ar !== undefined) { const b = document.getElementById('ahrs-ready-badge'); if(b) b.style.display = data.ar ? 'inline-block' : 'none'; }
+    if (data.cal_mag !== undefined) document.getElementById('cal-mag').textContent = data.cal_mag;
+    if (data.cal_sys !== undefined) document.getElementById('cal-sys').textContent = data.cal_sys;
+    if (data.rudder !== undefined) {
+      const rudderAngle = data.rudder;
+      const rd = document.getElementById('rudder-display'), rn = document.getElementById('rudder-needle'), rg = document.getElementById('rudder-gauge');
+      if (rd) {
+        rd.textContent = (rudderAngle >= 0 ? '+' : '') + rudderAngle.toFixed(1) + '°';
+        document.getElementById('rudder-bar-fill').style.width = Math.min(100, Math.max(0, 50 + (rudderAngle / 30) * 50)) + '%';
+        rd.classList.remove('centered');
+      }
+      if (rn) {
+        rn.style.transform = `translate(-50%, -50%) rotate(${Math.max(-45, Math.min(45, rudderAngle * 1.5))}deg)`;
+        rn.classList.remove('centered', 'warning', 'danger');
+      }
+      if (rg) rg.classList.remove('centered', 'warning', 'danger');
+
+      const absAngle = Math.abs(rudderAngle);
+      if (absAngle <= 2) { 
+        if(rd) rd.classList.add('centered'); 
+        if(rn) rn.classList.add('centered'); 
+        if(rg) rg.classList.add('centered'); 
+      }
+      else if (absAngle >= 35) { 
+        if(rn) rn.classList.add('danger'); 
+        if(rg) rg.classList.add('danger'); 
+      }
+      else if (absAngle >= 20) { 
+        if(rn) rn.classList.add('warning'); 
+        if(rg) rg.classList.add('warning'); 
+      }
+      
+      if (Math.abs(rudderAngle - lastRudderAngle) > 5) { 
+        rudderMoveCount++; 
+        lastRudderAngle = rudderAngle; 
+        document.getElementById('rudder-movements').textContent = rudderMoveCount; 
+      }
+    }
+    return;
+  }
+
+  if (data.type !== "status_update") return;
+  const activeEl = document.activeElement;
+
+  if (data.gps_valid !== undefined) {
+    isGpsValid = data.gps_valid;
+    const gpsDot = document.getElementById('gps-dot');
+    if (gpsDot) gpsDot.className = isGpsValid ? 'status-dot online' : 'status-dot offline';
+  }
+  if (data.satellites !== undefined) {
+    document.getElementById('sat-display').textContent = data.satellites;
+    document.getElementById('gps-sat-count').textContent = data.satellites + ' Sat';
+  }
+  if (data.course !== undefined) currentGpsCourse = data.course;
+
+  if (data.sensor_link_online !== undefined) { const dot = document.getElementById('sensor-dot'); const text = document.getElementById('sensor-text'); dot.className = data.sensor_link_online ? 'status-dot online' : 'status-dot offline'; text.textContent = data.sensor_link_online ? 'Online' : 'Offline'; }
+  // Aggiornamento Trust Indicator basato sulla sorgente reale
+  if (data.h_src !== undefined) {
+    updateTrustIndicator(data.h_weight || 0.9, data.h_src);
+  } else if (data.ar !== undefined) {
+    // Fallback basato su AHRS Ready se h_src non è presente
+    updateTrustIndicator(data.ar ? 0.9 : 0.2, data.ar ? 'BUSSOLA' : 'GPS_FORZATO');
+  }
+
+  if (data.heading !== undefined) { 
+    document.getElementById('heading-display').innerHTML = ((Math.round(data.heading) % 360) + 360) % 360 + '<span>°</span>'; 
+  }
+  
+
+  if (data.ap_mode_str !== undefined) {
+    const mode = data.ap_mode_int; let color = 'var(--accent-danger)';
+    if (mode === 1 || mode === 2) color = 'var(--accent-success)';
+    if (mode === 3) color = 'var(--accent-warning)';
+    document.getElementById('ap-status').textContent = data.ap_mode_str; document.getElementById('ap-status').style.color = color;
+    document.getElementById('map-nav-status').textContent = data.ap_mode_str; document.getElementById('map-nav-status').style.color = color;
+    
+    // Sincronizza il nuovo pulsante header
+    const btnHeaderAp = document.getElementById('btn-header-ap');
+    if (btnHeaderAp) {
+      if (mode === 1 || mode === 2) {
+        btnHeaderAp.textContent = 'AUTO ON';
+        btnHeaderAp.className = 'btn-header-ap active';
+      } else {
+        btnHeaderAp.textContent = 'AUTO OFF';
+        btnHeaderAp.className = 'btn-header-ap inactive';
+      }
+    }
+  }
+
+  if (data.current_wp >= 0 && data.target_name) { document.getElementById('current-wp').textContent = data.target_name; document.getElementById('wp-distance').textContent = data.distance ? data.distance.toFixed(0) + 'm' : '-'; document.getElementById('wp-bearing').textContent = data.bearing ? data.bearing.toFixed(0) + '°' : '-'; } else { document.getElementById('current-wp').textContent = '-'; document.getElementById('wp-distance').textContent = '-'; document.getElementById('wp-bearing').textContent = '-'; }
+  if (data.waypoints) { waypoints = data.waypoints; updateMapWaypoints(waypoints); renderWpList(waypoints); document.getElementById('wp-name-input').value = `WP${waypoints.length + 1}`; const completed = waypoints.filter(wp => wp.reached).length; if (completed > waypointsCompleted) { waypointsCompleted = completed; document.getElementById('wp-completed').textContent = completed; } }
+  if (data.cal_sys !== undefined) { document.getElementById('cal-sys').textContent = data.cal_sys; document.getElementById('cal-gyro').textContent = data.cal_gyro; document.getElementById('cal-accel').textContent = data.cal_accel; document.getElementById('cal-mag').textContent = data.cal_mag; }
+  if (data.compass_offset !== undefined) { let o = data.compass_offset; if (o > 180) o -= 360; const s = o >= 0 ? '+' : ''; document.getElementById('compass-offset-display').textContent = s + o.toFixed(2) + '°'; }
+
+  if (data.imu_type !== undefined) { const b = document.getElementById('imu-type-badge'); if(b) b.textContent = data.imu_type; }
+  if (data.ahrs_ready !== undefined) { const b = document.getElementById('ahrs-ready-badge'); if(b) b.style.display = data.ahrs_ready ? 'inline-block' : 'none'; const c = document.getElementById('cal-sys'); if(c) c.style.color = data.ahrs_ready ? '' : 'var(--accent-warning)'; }
+  if (data.current_profile_name !== undefined) { if (data.current_profile_name) showActiveProfile(data.current_profile_name); else hideActiveProfile(); }
+  if (data.l1_period !== undefined) document.getElementById('profL1').textContent = data.l1_period.toFixed(1);
+  if (data.max_rudder_angle !== undefined) document.getElementById('profRudder').textContent = data.max_rudder_angle.toFixed(0);
+  if (data.waypoint_radius !== undefined) document.getElementById('profWp').textContent = data.waypoint_radius.toFixed(0);
+  if (data.gps_min_speed !== undefined) document.getElementById('profGpsMin').textContent = data.gps_min_speed.toFixed(1);
+  const params = { 'inputKp': data.kp, 'inputKi': data.ki, 'inputKd': data.kd, 'inputL1Period': data.l1_period, 'inputPidTolerance': data.pid_tolerance, 'inputHysteresisFactor': data.hysteresis_factor, 'inputHeadingTolerance': data.heading_tolerance, 'inputXtrackDeadZone': data.xtrack_dead_zone, 'inputWaypointRadius': data.waypoint_radius, 'inputMinPwmSpeed': data.min_pwm_speed, 'inputMotorAggressiveness': data.motor_aggressiveness, 'inputMaxRudderAngle': data.max_rudder_angle };
+  for (const [id, value] of Object.entries(params)) { if (value !== undefined) { const el = document.getElementById(id); if (el && activeEl !== el) { let d = 2; if (id.includes('Ki')) d = 3; else if (id.includes('HysteresisFactor')) d = 1; else if (id.includes('MotorAggressiveness') || id.includes('MaxRudderAngle') || id.includes('MinPwmSpeed') || id.includes('L1Period')) d = 0; el.value = value.toFixed(d); } } }
+}
+
+function updateBoatTrail(newPosition) {
+  if (!map) return; const now = Date.now(); if (now - lastTrailSampleTime < TRAIL_SAMPLE_INTERVAL) return; lastTrailSampleTime = now;
+  boatTrail.push({lat: newPosition.lat, lng: newPosition.lng}); const currentPos = L.latLng(newPosition.lat, newPosition.lng);
+  while (boatTrail.length > 0) { const oldestPos = L.latLng(boatTrail[0].lat, boatTrail[0].lng); if (currentPos.distanceTo(oldestPos) > TRAIL_MAX_DISTANCE) boatTrail.shift(); else break; }
+  if (trailLine) map.removeLayer(trailLine); if (boatTrail.length > 1) trailLine = L.polyline(boatTrail, { color: '#ff3d71', weight: 3, opacity: 0.8, interactive: false }).addTo(map);
+}
+
+function toggleFollowBoat() { followBoat = !followBoat; updateFollowButton(); if (followBoat && map && boatMarker) map.setView(boatMarker.getLatLng(), 16); }
+function updateFollowButton() { const btn = document.getElementById('btn-follow-boat'); if (btn) { if (followBoat) { btn.innerHTML = '<i class="ph ph-crosshair"></i> Seguendo'; btn.style.background = 'rgba(0, 212, 255, 0.2)'; btn.style.borderColor = 'rgba(0, 212, 255, 0.5)'; } else { btn.innerHTML = '<i class="ph ph-map-pin"></i> Fermo'; btn.style.background = 'rgba(255, 179, 0, 0.2)'; btn.style.borderColor = 'rgba(255, 179, 0, 0.5)'; } } }
+
+function initMiniMap() {
+  const startPos = [boatPosition.lat, boatPosition.lng];
+  miniMap = L.map('mini-map', { zoomControl: true, attributionControl: false, minZoom: 3, maxZoom: 19 }).setView(startPos, 14);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '' }).addTo(miniMap);
+  const boatIcon = L.divIcon({ className: '', html: `<div style="width:10px;height:10px;background:#00d4ff;border:2px solid #fff;border-radius:50%;box-shadow:0 0 6px rgba(0,212,255,0.8);"></div>`, iconSize: [10, 10], iconAnchor: [5, 5] });
+  miniBoatMarker = L.marker(startPos, { icon: boatIcon, zIndexOffset: 1000 }).addTo(miniMap);
+  miniMap.on('click', (e) => e.originalEvent.stopPropagation());
+}
+
+function updateMiniMap(wps) {
+  if (!miniMap) return; miniMap.eachLayer((layer) => { if (layer instanceof L.Marker && layer !== miniBoatMarker) miniMap.removeLayer(layer); if (layer instanceof L.Polyline) miniMap.removeLayer(layer); });
+  if (!wps || wps.length === 0) return; const points = wps.map(wp => [wp.lat, wp.lon]); const firstPending = wps.findIndex(wp => !wp.reached);
+  if (firstPending > 0) L.polyline(points.slice(0, firstPending + 1), { color: '#556677', weight: 2, dashArray: '4,7', opacity: 0.6 }).addTo(miniMap);
+  if (firstPending !== -1) L.polyline(points.slice(firstPending), { color: '#00d4ff', weight: 2, dashArray: '5,8', opacity: 0.9 }).addTo(miniMap);
+  else L.polyline(points, { color: '#556677', weight: 2, dashArray: '4,7', opacity: 0.6 }).addTo(miniMap);
+  wps.forEach((wp, i) => { const reached = wp.reached; L.marker([wp.lat, wp.lon], { icon: L.divIcon({ className: '', html: `<div style="width:16px;height:16px;background:${reached?'#556677':'#00d4ff'};border:2px solid ${reached?'#334455':'#fff'};border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:${reached?'#aabbcc':'#001a2e'};box-shadow:0 0 4px rgba(0,0,0,.5);opacity:${reached?.5:1}">${i+1}</div>`, iconSize: [16,16], iconAnchor: [8,8] }) }).addTo(miniMap); });
+  try { miniMap.fitBounds(L.latLngBounds([...points, [boatPosition.lat, boatPosition.lng]]), { padding: [16,16], maxZoom: 16 }); } catch(e) {}
+}
+
+function updateMiniBoat(lat, lng) { if (!miniBoatMarker) return; miniBoatMarker.setLatLng([lat, lng]); }
+
+function initMap() {
+  map = L.map('map', { zoomControl: false, minZoom: 3, maxZoom: 19 }).setView(boatPosition, 16);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '' }).addTo(map);
+  boatMarker = L.circleMarker(boatPosition, { radius: 6, fillColor: "#00d4ff", color: "#ffffff", weight: 3, opacity: 1, fillOpacity: 0.9 }).addTo(map);
+  distanceRing = L.circle(boatPosition, { radius: 15, color: '#00d4ff', fillOpacity: 0.1 }).addTo(map);
+  map.on('click', (e) => { const name = document.getElementById('wp-name-input').value || `WP${waypoints.length + 1}`; send('add_wp', {lat: e.latlng.lat, lon: e.latlng.lng, name}); });
+  map.on('dragstart', () => { if (followBoat) { followBoat = false; updateFollowButton(); } });
+  map.on('zoomstart', () => { if (followBoat) { followBoat = false; updateFollowButton(); } });
+  document.getElementById('btn-start-nav').onclick = () => send('start_nav');
+  document.getElementById('btn-stop-nav').onclick = () => send('stop');
+}
+
+function updateMapWaypoints(wps) {
+  updateMiniMap(wps); map.eachLayer((layer) => { if (layer instanceof L.Marker && layer !== boatMarker) map.removeLayer(layer); if (layer instanceof L.Polyline && layer !== distanceRing) map.removeLayer(layer); });
+  const points = wps.map(wp => [wp.lat, wp.lon]); wps.forEach(wp => {
+    const marker = L.marker([wp.lat, wp.lon], { draggable: true }).addTo(map).bindPopup(wp.name); marker.wp_id = wp.id;
+    marker.on('dragend', function(event) {
+      const draggedMarker = event.target, newLatLng = draggedMarker.getLatLng();
+      const waypointToUpdate = waypoints.find(w => w.id === draggedMarker.wp_id);
+      if (waypointToUpdate) { waypointToUpdate.lat = newLatLng.lat; waypointToUpdate.lon = newLatLng.lng; updateMapWaypoints(waypoints); send('update_wps', { waypoints }); }
+    });
+  });
+  if (points.length > 0) L.polyline(points, { color: '#00d4ff', dashArray: '5,10' }).addTo(map);
+}
+
+function renderWpList(wps) { document.getElementById('waypoint-list').innerHTML = wps.map(wp => `<div class="wp-list-item"><span class="wp-name">${wp.name}</span> ${wp.reached ? '<i class="ph ph-check-circle" style="color: var(--accent-success);"></i>' : ''}<button class="btn-goto" onclick="send('goto_wp', {id:${wp.id}})">GO</button></div>`).join(''); }
+
+function setupControls() {
+  const btnL = document.getElementById('btn-left'), btnR = document.getElementById('btn-right'), btnHL = document.getElementById('btn-header-left'), btnHR = document.getElementById('btn-header-right');
+  let timer; const startL = () => { send('left'); timer = setInterval(() => send('left'), 200); }; const startR = () => { send('right'); timer = setInterval(() => send('right'), 200); }; const stop = () => { clearInterval(timer); send('release'); };
+  ['touchstart','mousedown'].forEach(evt => { btnL.addEventListener(evt, e => { e.preventDefault(); startL(); }); btnR.addEventListener(evt, e => { e.preventDefault(); startR(); }); btnHL.addEventListener(evt, e => { e.preventDefault(); startL(); }); btnHR.addEventListener(evt, e => { e.preventDefault(); startR(); }); });
+  ['touchend','mouseup','mouseleave'].forEach(evt => { btnL.addEventListener(evt, e => { e.preventDefault(); stop(); }); btnR.addEventListener(evt, e => { e.preventDefault(); stop(); }); btnHL.addEventListener(evt, e => { e.preventDefault(); stop(); }); btnHR.addEventListener(evt, e => { e.preventDefault(); stop(); }); });
+  document.getElementById('btn-center').onclick = () => send('rudder_center'); document.getElementById('btn-header-center').onclick = () => send('rudder_center');
+  document.getElementById('btn-emergency').onclick = () => send('stop'); document.getElementById('btn-ap-start').onclick = () => send('autostart');
+}
+
+function setParam(param) {
+  const idMap = { 'kp':'inputKp','ki':'inputKi','kd':'inputKd','l1_period':'inputL1Period','pid_tolerance':'inputPidTolerance','hysteresis_factor':'inputHysteresisFactor','heading_tolerance':'inputHeadingTolerance','xtrack_dead_zone':'inputXtrackDeadZone','waypoint_radius':'inputWaypointRadius','min_pwm_speed':'inputMinPwmSpeed','motor_aggressiveness':'inputMotorAggressiveness','max_rudder_angle':'inputMaxRudderAngle' };
+  const id = idMap[param]; if (!id) return; send('setParam', {param, value: parseFloat(document.getElementById(id).value)});
+}
+
+function startTripComputer() { tripStartTime = Date.now(); setInterval(() => { if (!tripStartTime) return; const el = Date.now() - tripStartTime, h = Math.floor(el / 3600000), m = Math.floor((el % 3600000) / 60000), s = Math.floor((el % 60000) / 1000); document.getElementById('trip-time').textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; if (speedReadings.length > 0) document.getElementById('avg-speed').textContent = (speedReadings.reduce((a,b) => a+b, 0) / speedReadings.length).toFixed(1); }, 1000); }
+function updateTripDistance(currentPos) { if (!lastTripPosition) { lastTripPosition = currentPos; return; } const R = 6371, dLat = (currentPos.lat - lastTripPosition.lat) * Math.PI / 180, dLon = (currentPos.lng - lastTripPosition.lng) * Math.PI / 180, a = Math.sin(dLat/2)**2 + Math.cos(lastTripPosition.lat * Math.PI / 180) * Math.cos(currentPos.lat * Math.PI / 180) * Math.sin(dLon/2)**2; tripDistance += R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) * 0.539957; document.getElementById('trip-distance').textContent = tripDistance.toFixed(2); lastTripPosition = currentPos; }
+function resetTrip() { 
+  if (!confirm('Reset all trip data and waypoint status?')) return; 
+  send('reset_reached');
+  tripStartTime = Date.now(); 
+  tripDistance = 0; 
+  maxSpeed = 0; 
+  speedReadings = []; 
+  speedHistory = []; 
+  waypointsCompleted = 0; 
+  rudderMoveCount = 0; 
+  lastTripPosition = null; 
+  ['trip-distance','max-speed','avg-speed','wp-completed','rudder-movements'].forEach(id => { 
+    document.getElementById(id).textContent = id === 'trip-distance' || id === 'max-speed' || id === 'avg-speed' ? '0.0' : '0'; 
+  }); 
+  drawSpeedChart(); 
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const ring = document.getElementById('compass-ring');
+  if (ring) {
+    for (let i = 0; i < 360; i += 5) {
+      if (i % 30 === 0) continue; // Salta i 30 gradi (hanno già i numeri)
+      const isTen = i % 10 === 0;
+      const wrapper = document.createElement('div');
+      wrapper.style.position = 'absolute';
+      wrapper.style.width = '100%';
+      wrapper.style.height = '100%';
+      wrapper.style.transform = `rotate(${i}deg)`;
+      wrapper.style.pointerEvents = 'none';
+      const tick = document.createElement('div');
+      tick.style.position = 'absolute';
+      tick.style.width = isTen ? '2px' : '1px';
+      tick.style.height = isTen ? '12px' : '8px';
+      tick.style.background = isTen ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.3)';
+      tick.style.left = '50%';
+      tick.style.top = isTen ? '4px' : '6px';
+      tick.style.transform = 'translateX(-50%)';
+      wrapper.appendChild(tick);
+      ring.appendChild(wrapper); // BUG FIX: tick marks erano creati ma non inseriti nel DOM
+    }
+  }
+});
+
+// ════════════════════════════════════════════════════════════
+//  CALIBRAZIONE MAGNETOMETRO HWT905
+// ════════════════════════════════════════════════════════════
+
+function initCalCanvas() {
+  calCanvas = document.getElementById('cal-scatter');
+  calCtx = calCanvas.getContext('2d');
+  const size = calCanvas.offsetWidth;
+  calCanvas.width = size;
+  calCanvas.height = size;
+}
+
+function startMagCal() {
+  if (!ws || ws.readyState !== WebSocket.OPEN) {
+    alert('Non connesso al controller. Verifica la connessione WebSocket.');
+    return;
+  }
+  magCalActive = true;
+  magSamples = [];
+  sectorHit = new Array(CAL_SECTORS).fill(false);
+  initCalCanvas();
+  clearCalCanvas();
+  updateCalRing(0);
+  document.getElementById('cal-coverage').textContent = '0%';
+  document.getElementById('cal-sample-count').textContent = '0';
+  document.getElementById('cal-status-bar').textContent = 'CALIBRAZIONE ATTIVA — Ruota la barca di 360°';
+  document.getElementById('cal-status-bar').style.color = 'var(--accent-primary)';
+  document.getElementById('btn-cal-start').disabled = true;
+  document.getElementById('btn-cal-start').style.opacity = '0.4';
+  document.getElementById('btn-cal-save').disabled = false;
+  document.getElementById('btn-cal-save').style.opacity = '1';
+  document.getElementById('btn-cal-cancel').disabled = false;
+  document.getElementById('btn-cal-cancel').style.opacity = '1';
+  ws.send(JSON.stringify({ command: 'start_mag_cal' }));
+}
+
+function cancelMagCal() {
+  magCalActive = false;
+  magSamples = [];
+  sectorHit = new Array(CAL_SECTORS).fill(false);
+  document.getElementById('cal-status-bar').textContent = 'IN ATTESA — Premi Avvia per iniziare';
+  document.getElementById('cal-status-bar').style.color = '';
+  document.getElementById('btn-cal-start').disabled = false;
+  document.getElementById('btn-cal-start').style.opacity = '1';
+  document.getElementById('btn-cal-save').disabled = true;
+  document.getElementById('btn-cal-save').style.opacity = '0.4';
+  document.getElementById('btn-cal-cancel').disabled = true;
+  document.getElementById('btn-cal-cancel').style.opacity = '0.4';
+  updateCalRing(0);
+  if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ command: 'stop_mag_cal' }));
+}
+
+function saveMagCal() {
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ command: 'save_mag_offsets' }));
+  }
+  document.getElementById('cal-status-bar').textContent = 'SALVATAGGIO IN CORSO...';
+}
+
+function onMagCalSample(mx, my) {
+  if (!magCalActive) return;
+  magSamples.push({ mx, my });
+
+  // Aggiorna settore copertura (angolo del campione rispetto al centro approssimativo)
+  const centerX = magSamples.reduce((s, p) => s + p.mx, 0) / magSamples.length;
+  const centerY = magSamples.reduce((s, p) => s + p.my, 0) / magSamples.length;
+  const angle = Math.atan2(my - centerY, mx - centerX);
+  const sector = Math.floor(((angle + Math.PI) / (2 * Math.PI)) * CAL_SECTORS) % CAL_SECTORS;
+  sectorHit[sector] = true;
+
+  const coverage = Math.round((sectorHit.filter(Boolean).length / CAL_SECTORS) * 100);
+  document.getElementById('cal-coverage').textContent = coverage + '%';
+  document.getElementById('cal-sample-count').textContent = magSamples.length;
+  updateCalRing(coverage);
+  drawCalPoint(mx, my);
+}
+
+function updateCalRing(coverage) {
+  const ring = document.getElementById('cal-ring');
+  if (coverage >= 85) {
+    ring.style.borderColor = '#00e676';
+    ring.style.boxShadow = '0 0 20px rgba(0,230,118,0.5)';
+    document.getElementById('btn-cal-save').style.background = 'linear-gradient(135deg, #00c853, #00e676)';
+  } else if (coverage >= 50) {
+    ring.style.borderColor = '#ff9100';
+    ring.style.boxShadow = '0 0 12px rgba(255,145,0,0.4)';
+    document.getElementById('btn-cal-save').style.background = '';
+  } else if (coverage > 0) {
+    ring.style.borderColor = '#ff3d71';
+    ring.style.boxShadow = 'none';
+    document.getElementById('btn-cal-save').style.background = '';
+  } else {
+    ring.style.borderColor = '#555';
+    ring.style.boxShadow = 'none';
+    document.getElementById('btn-cal-save').style.background = '';
+  }
+}
+
+function clearCalCanvas() {
+  if (!calCtx) return;
+  calCtx.clearRect(0, 0, calCanvas.width, calCanvas.height);
+  calCtx.strokeStyle = 'rgba(255,255,255,0.05)';
+  calCtx.lineWidth = 1;
+  calCtx.beginPath();
+  calCtx.moveTo(calCanvas.width / 2, 0);
+  calCtx.lineTo(calCanvas.width / 2, calCanvas.height);
+  calCtx.moveTo(0, calCanvas.height / 2);
+  calCtx.lineTo(calCanvas.width, calCanvas.height / 2);
+  calCtx.stroke();
+}
+
+function drawCalPoint(mx, my) {
+  if (!calCtx || magSamples.length < 2) return;
+  const xs = magSamples.map(s => s.mx);
+  const ys = magSamples.map(s => s.my);
+  const minX = Math.min(...xs), maxX = Math.max(...xs);
+  const minY = Math.min(...ys), maxY = Math.max(...ys);
+  const rangeX = maxX - minX || 1;
+  const rangeY = maxY - minY || 1;
+  const padding = 20;
+  const w = calCanvas.width - padding * 2;
+  const h = calCanvas.height - padding * 2;
+
+  clearCalCanvas();
+  calCtx.fillStyle = 'rgba(0, 212, 255, 0.7)';
+  for (const s of magSamples) {
+    const px = padding + ((s.mx - minX) / rangeX) * w;
+    const py = padding + ((maxY - s.my) / rangeY) * h;
+    calCtx.beginPath();
+    calCtx.arc(px, py, 2, 0, Math.PI * 2);
+    calCtx.fill();
+  }
+}
+
+function onMagCalConfirm(ok) {
+  magCalActive = false;
+  if (ok) {
+    document.getElementById('cal-status-bar').textContent = '✓ CALIBRAZIONE SALVATA — Sistema in modalità normale';
+    document.getElementById('cal-status-bar').style.color = '#00e676';
+  } else {
+    document.getElementById('cal-status-bar').textContent = '✗ ERRORE SALVATAGGIO — Riprova';
+    document.getElementById('cal-status-bar').style.color = '#ff3d71';
+  }
+  document.getElementById('btn-cal-start').disabled = false;
+  document.getElementById('btn-cal-start').style.opacity = '1';
+  document.getElementById('btn-cal-save').disabled = true;
+  document.getElementById('btn-cal-save').style.opacity = '0.4';
+  document.getElementById('btn-cal-cancel').disabled = true;
+  document.getElementById('btn-cal-cancel').style.opacity = '0.4';
+}
+
+// ════════════════════════════════════════════════════════════
+//  MAPPE OFFLINE — Cache API + Service Worker
+// ════════════════════════════════════════════════════════════
+
+const TILE_CACHE_NAME = 'cms-map-tiles-v1';
+const TILE_URL_TEMPLATE = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+// Registrazione Service Worker per intercettazione tile offline
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    // Il SW viene generato inline e registrato come blob URL
+    const swCode = `
+const CACHE = '${TILE_CACHE_NAME}';
+const APP_CACHE = 'cms-app-v1';
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(APP_CACHE).then(cache =>
+      fetch(self.registration.scope + 'index.html')
+        .then(response => cache.put('index.html', response))
+        .catch(() => {})
+    )
+  );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', event => {
+  const url = event.request.url;
+  
+  if (url.includes('arcgisonline.com') || url.includes('/tile/')) {
+    event.respondWith(
+      caches.open(CACHE).then(cache =>
+        cache.match(event.request).then(cached => {
+          if (cached) return cached;
+          return fetch(event.request).then(response => {
+            if (response.ok) cache.put(event.request, response.clone());
+            return response;
+          }).catch(() => cached || new Response('', {status: 503}));
+        })
+      )
+    );
+    return;
+  }
+  
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).catch(() =>
+        caches.open(APP_CACHE).then(cache =>
+          cache.match('index.html')
+        )
+      )
+    );
+    return;
+  }
+});
+`;
+    const blob = new Blob([swCode], { type: 'application/javascript' });
+    const swUrl = URL.createObjectURL(blob);
+    navigator.serviceWorker.register(swUrl).then(() => {
+      // Chiedi a Android di non cancellare la cache automaticamente
+      if (navigator.storage && navigator.storage.persist) {
+        navigator.storage.persist().then(granted => {
+          console.log('[CMS] Storage persist:', granted ? 'garantito' : 'best-effort');
+        });
+      }
+      updateCacheInfo();
+    }).catch(e => console.warn('[CMS] SW non registrato (richiede HTTPS o localhost):', e.message));
+  });
+}
+
+function toggleOfflinePanel() {
+  const panel = document.getElementById('offline-panel');
+  if (panel.style.display === 'none' || !panel.style.display) {
+    panel.style.display = 'block';
+    updateCacheInfo();
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+// Calcola il numero di tile per un'area e un range di zoom
+function countTilesInBounds(bounds, zMin, zMax) {
+  let total = 0;
+  for (let z = zMin; z <= zMax; z++) {
+    const tileMin = latLngToTile(bounds.getNorth(), bounds.getWest(), z);
+    const tileMax = latLngToTile(bounds.getSouth(), bounds.getEast(), z);
+    total += (Math.abs(tileMax.x - tileMin.x) + 1) * (Math.abs(tileMax.y - tileMin.y) + 1);
+  }
+  return total;
+}
+
+function latLngToTile(lat, lng, z) {
+  const x = Math.floor((lng + 180) / 360 * Math.pow(2, z));
+  const y = Math.floor((1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, z));
+  return { x, y };
+}
+
+function* tilesInBounds(bounds, zMin, zMax) {
+  for (let z = zMin; z <= zMax; z++) {
+    const tMin = latLngToTile(bounds.getNorth(), bounds.getWest(), z);
+    const tMax = latLngToTile(bounds.getSouth(), bounds.getEast(), z);
+    for (let x = Math.min(tMin.x, tMax.x); x <= Math.max(tMin.x, tMax.x); x++) {
+      for (let y = Math.min(tMin.y, tMax.y); y <= Math.max(tMin.y, tMax.y); y++) {
+        yield { z, x, y };
+      }
+    }
+  }
+}
+
+function estimateTiles() {
+  if (!map) return;
+  const bounds = map.getBounds();
+  const zMax = parseInt(document.getElementById('offline-zoom-max').value);
+  const zMin = 10;
+  const count = countTilesInBounds(bounds, zMin, zMax);
+  const estimatedMB = (count * 25 / 1024).toFixed(1); // ~25KB per tile satellite
+  const el = document.getElementById('offline-estimate');
+  el.innerHTML = `<strong style="color:var(--accent-primary)">${count}</strong> tile stimati<br>
+    <span style="color:var(--text-muted)">~${estimatedMB} MB &nbsp;|&nbsp; Zoom ${zMin}→${zMax}</span>`;
+  el.style.color = count > 10000 ? 'var(--accent-warning)' : 'var(--text-secondary)';
+  document.getElementById('btn-download-tiles').disabled = (count > 5000);
+  if (count > 5000) {
+    el.innerHTML += `<br><span style="color:var(--accent-danger)">⚠️ Area troppo grande (>125MB). Riduci lo zoom massimo o l'area visibile.</span>`;
+  } else if (count > 3000) {
+    el.innerHTML += `<br><span style="color:var(--accent-warning)">⚠️ Attenzione: download grande. Potrebbe richiedere qualche minuto.</span>`;
+  }
+  // Salva i parametri calcolati per il download
+  document.getElementById('btn-download-tiles')._zMin = zMin;
+  document.getElementById('btn-download-tiles')._zMax = zMax;
+  document.getElementById('btn-download-tiles').disabled = (count > 5000);
+}
+
+let cancelDownloadTilesFlag = false;
+function stopDownloadTiles() {
+  cancelDownloadTilesFlag = true;
+}
+
+async function downloadTiles() {
+  if (!map) return;
+  cancelDownloadTilesFlag = false;
+  const btn = document.getElementById('btn-download-tiles');
+  const zMin = btn._zMin || 10;
+  const zMax = parseInt(document.getElementById('offline-zoom-max').value);
+  const bounds = map.getBounds();
+  const total = countTilesInBounds(bounds, zMin, zMax);
+
+  if (!confirm(`Scaricare ${total} tile (~${(total*25/1024).toFixed(1)} MB)?\nL'operazione potrebbe richiedere alcuni minuti.`)) return;
+
+  const progress = document.getElementById('offline-progress');
+  const progressBar = document.getElementById('offline-progress-bar');
+  const progressLabel = document.getElementById('offline-progress-label');
+  progress.style.display = 'block';
+  btn.disabled = true;
+
+  let done = 0, errors = 0;
+  const cache = await caches.open(TILE_CACHE_NAME);
+
+  for (const { z, x, y } of tilesInBounds(bounds, zMin, zMax)) {
+    if (cancelDownloadTilesFlag) {
+      showToast(`Download interrotto. Salvati ${done} tile.`);
+      break;
+    }
+    const url = TILE_URL_TEMPLATE.replace('{z}', z).replace('{y}', y).replace('{x}', x);
+    try {
+      const cached = await cache.match(url);
+      if (!cached) {
+        const resp = await fetch(url);
+        if (resp.ok) await cache.put(url, resp);
+      }
+    } catch { errors++; }
+    done++;
+    const pct = Math.round((done / total) * 100);
+    progressBar.style.width = pct + '%';
+    progressLabel.textContent = `Download: ${done}/${total} tile (${pct}%) — errori: ${errors}`;
+    if (done % 20 === 0) await new Promise(r => setTimeout(r, 0)); // yield UI
+  }
+
+  progress.style.display = 'none';
+  btn.disabled = false;
+  showToast(`✓ ${done - errors} tile salvati offline (${errors} errori)`);
+  updateCacheInfo();
+}
+
+async function deleteTiles() {
+  if (!map) return;
+  const bounds = map.getBounds();
+  const zMax = parseInt(document.getElementById('offline-zoom-max').value);
+  const zMin = 10;
+  const count = countTilesInBounds(bounds, zMin, zMax);
+  if (!confirm(`Eliminare i tile dell'area visibile (${count} tile zoom ${zMin}→${zMax})?`)) return;
+  const cache = await caches.open(TILE_CACHE_NAME);
+  let deleted = 0;
+  for (const { z, x, y } of tilesInBounds(bounds, zMin, zMax)) {
+    const url = TILE_URL_TEMPLATE.replace('{z}', z).replace('{y}', y).replace('{x}', x);
+    if (await cache.delete(url)) deleted++;
+  }
+  showToast(`✓ ${deleted} tile eliminati`);
+  updateCacheInfo();
+}
+
+async function clearAllTiles() {
+  if (!confirm('⚠️ Eliminare TUTTA la cache mappe offline?')) return;
+  await caches.delete(TILE_CACHE_NAME);
+  showToast('✓ Cache mappe svuotata');
+  updateCacheInfo();
+  document.getElementById('offline-estimate').textContent = 'Imposta l\'area visibile sulla mappa, poi stima i tile';
+}
+
+async function updateCacheInfo() {
+  const el = document.getElementById('offline-cache-info');
+  if (!el) return;
+  try {
+    const cache = await caches.open(TILE_CACHE_NAME);
+    const keys = await cache.keys();
+    el.textContent = `Cache: ${keys.length} tile salvati`;
+    if (navigator.storage && navigator.storage.estimate) {
+      const est = await navigator.storage.estimate();
+      const usedMB = (est.usage / 1024 / 1024).toFixed(1);
+      const quotaMB = (est.quota / 1024 / 1024).toFixed(0);
+      el.textContent += ` | ${usedMB}/${quotaMB} MB usati`;
+    }
+  } catch { el.textContent = 'Cache: non disponibile (richiede HTTPS)'; }
+}
+
+
+</script>
+</body>
+</html>
